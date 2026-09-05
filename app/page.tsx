@@ -13,7 +13,7 @@ export default function Home() {
       <section className="hero shell">
         <div className="hero-meta">
           <span>
-            <i className="status-dot" /> AI / ML ENGINEER
+            <i className="status-dot" /> AI ENGINEER / AGENTIC SYSTEMS
           </span>
           <span>BANGALORE, INDIA · IST</span>
         </div>
@@ -26,10 +26,10 @@ export default function Home() {
               Engineered<span className="orange">.</span>
             </h1>
             <p className="hero-description">
-              I turn complex problems into intelligent systems.
-              <br className="desktop-break" /> Applied AI, thoughtful
-              infrastructure, and code
-              <br className="desktop-break" /> that works beyond the notebook.
+              I build agents that reason, act, and work with people.
+              <br className="desktop-break" /> Tool-calling workflows, voice AI,
+              <br className="desktop-break" /> and the systems that make them
+              dependable.
             </p>
             <div className="hero-actions">
               <a className="button-primary" href="#work">
@@ -77,8 +77,8 @@ export default function Home() {
       </section>
       <div className="marquee" aria-label="Specialties">
         <div>
-          APPLIED AI <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> MACHINE
-          LEARNING <span>✳</span> INTELLIGENT SECURITY <span>✳</span>
+          AGENTIC AI <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> VOICE
+          INTELLIGENCE <span>✳</span> INTELLIGENT SECURITY <span>✳</span>
         </div>
       </div>
       <section className="shell section" id="work">
@@ -97,7 +97,7 @@ export default function Home() {
             machine intelligence and real-world impact.
           </p>
         </div>
-        <SelectedWork />
+        <SelectedWork featuredOnly />
       </section>
       <section className="experience-section" id="experience">
         <div className="shell section">
@@ -233,7 +233,7 @@ export default function Home() {
           </h2>
           <div className="contact-bottom">
             <p>
-              AI products, scalable systems, or a good conversation.
+              AI agents, intelligent products, or a good conversation.
               <br />
               I’d love to hear what you’re working on.
             </p>

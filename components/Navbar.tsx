@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
@@ -9,14 +10,18 @@ export default function Navbar() {
         <Link href="/" className="wordmark" aria-label="Pavan home">
           pavan<span>®</span>
         </Link>
-        <button
-          className="menu-toggle"
-          aria-expanded={open}
-          aria-controls="navigation-links"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "Close −" : "Menu +"}
-        </button>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="navigation-links"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "Close −" : "Menu +"}
+          </button>
+        </div>
         <div
           id="navigation-links"
           className={`nav-links ${open ? "is-open" : ""}`}

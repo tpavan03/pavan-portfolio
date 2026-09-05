@@ -1,4 +1,4 @@
-\documentclass[letterpaper,10.8pt]{article}
+\documentclass[letterpaper,11pt]{article}
 
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
@@ -63,72 +63,84 @@
 \vspace{-6pt}
 \end{center}
 
-\section{Education}
-\resumeSubHeadingListStart
-\resumeSubheading
-{Birla Institute of Technology and Science, Pilani (Goa Campus)}{2024 -- 2026}
-{M.E. Computer Science (CGPA: 9.55)}{Goa}
-\resumeSubheading
-{Sri Venkateswara University College of Engineering}{2020 -- 2024}
-{B.Tech Computer Science \& Engineering (CGPA: 8.6)}{Tirupati}
-\resumeSubHeadingListEnd
-
 \section{Experience}
 \resumeSubHeadingListStart
 \resumeSubheading
-{Netskope}{Jan 2026 -- Present}
+{XFactr Softwares Private Limited (Xfactr.ai)}{July 2026 -- Present}
+{Software Engineer -- Distributed Systems \& AI Platforms}{Bangalore}
+\resumeItemListStart
+\resumeItem{Build a \textbf{C++17} tenant agent-package import runtime and deployment orchestration with \textbf{gRPC/Protobuf}, desired-state reconciliation, idempotency, leases, and fencing.}
+\resumeItem{Develop a \textbf{Go} edge/relay gateway with sticky sessions and streaming; implement durable continuation using acknowledged sequences and replay without re-execution, plus cancellation and recovery.}
+\resumeItem{Implement \textbf{OAuth 2.0/OIDC, PKCE, JWT/JWKS, RBAC}, tenant isolation, and human approvals; secure workload admission with signatures, mTLS, protected Unix sockets, and checkpoint/restore.}
+\resumeItem{Build typed \textbf{React/TypeScript} workspaces for tenant administrators, managers, employees, and operators, backed by shared API contracts.}
+\resumeItem{Develop \textbf{AgentHRMS / DeepSeek Harness} tool-calling workflows for leave, attendance, payroll, and administration using Python, Go, React, FastAPI, and WebSockets; support durable conversations, write approvals, artifacts, and interruptible \textbf{LiveKit/Deepgram} voice interactions.}
+\resumeItem{Validate changes through Go race tests, C++ Meson/Ninja builds, React type checks, Playwright, Docker gates, and negative identity and replay tests.}
+\resumeItemListEnd
+
+\resumeSubheading
+{Netskope}{Jan 2026 -- June 2026}
 {AI Intern -- Intrusion Prevention System (IPS) Team}{Bangalore}
 \resumeItemListStart
-\resumeItem{Designed a \textbf{multi-agent AI triage pipeline} using \textbf{LangChain} tool-calling agents -- orchestrator agent delegates to specialized tool agents (VirusTotal reputation, domain WHOIS age, User-Agent anomaly scoring, process behavior profiling) to autonomously classify tens of thousands of weekly IPS security alerts, achieving \textbf{80\%} reduction in manual analyst workload.}
-\resumeItem{Built a production ML pipeline ingesting \textbf{4.25M} events from \textbf{PostgreSQL}: multi-stage label conflict resolution, stratified downsampling, and \textbf{72} engineered features via \textbf{TF-IDF + Truncated SVD} (Latent Semantic Analysis) embeddings across URL, User-Agent, process, and hostname fields.}
-\resumeItem{Trained \textbf{LightGBM, XGBoost, Random Forest, SVM, LSTM, Bi-LSTM, GRU, FFNN} with \textbf{Optuna}; tracked experiments via \textbf{MLflow}; deployed as \textbf{Docker}-containerized \textbf{FastAPI} microservice with a \textbf{drift-monitoring agent} for automated retraining on evolving threat patterns.}
+\resumeItem{Built \textbf{LangChain} tool-calling agents for VirusTotal reputation, WHOIS, User-Agent anomalies, and process analysis; achieved \textbf{80\% manual analyst workload reduction}, exceeding a 50\% target.}
+\resumeItem{Processed \textbf{4.25M IPS events} into \textbf{72 features} using label conflict resolution, stratified sampling, and \textbf{TF-IDF + Truncated SVD} across URL, User-Agent, process, and hostname fields.}
+\resumeItem{Trained \textbf{LightGBM and LSTM} models with \textbf{Optuna} tuning and MLflow tracking; deployed a Docker-containerized REST service with monitoring, drift detection, and retraining.}
+\resumeItemListEnd
+
+\resumeSubheading
+{BITS Pilani Digital}{June 2025 -- Dec 2025}
+{Teaching Assistant -- Data Preprocessing \& Machine Learning}{M.Sc. programmes}
+\resumeItemListStart
+\resumeItem{Supported data preprocessing and machine learning curricula and evaluations for \textbf{300+ students}; automated grading to support course delivery.}
 \resumeItemListEnd
 \resumeSubHeadingListEnd
 
-\section{Projects}
+\section{Education}
 \resumeSubHeadingListStart
+\resumeSubheading
+{BITS Pilani, Goa Campus}{2024 -- 2026}
+{M.E. Computer Science -- CGPA: \textbf{9.67}}{Goa}
+\resumeSubheading
+{Sri Venkateswara University College of Engineering}{2020 -- 2024}
+{B.Tech Computer Science \& Engineering -- CGPA: 8.6}{Tirupati}
+\resumeSubHeadingListEnd
 
+\newpage
+\section{Selected Projects \& Research}
+\resumeSubHeadingListStart
 \resumeProjectHeading
-{\textbf{Phishing Detection with AI Agents \& Explainable DL} $|$ \emph{PyTorch, RoBERTa, LangChain, FastAPI, Docker}}
-{Aug 2024 -- Dec 2024}
+{\textbf{BITS Social -- Full-Stack Social Platform}}{Apr 2025 -- Present}
 \resumeItemListStart
-\resumeItem{Built an \textbf{agentic phishing detection pipeline}: LangChain orchestrator delegates URL feature extraction, transformer embedding generation (\textbf{BERT-CLS, RoBERTa, SBERT, USE, ALBERT}), and model selection to specialized tool agents -- deployed as a \textbf{FastAPI} microservice in \textbf{Docker} achieving \textbf{99.9\%} accuracy with RoBERTa-LSTM.}
-\resumeItem{Trained \textbf{FFNN, RNN, LSTM, Bi-LSTM, GRU} on standalone vs.\ concatenated embeddings; built an \textbf{explainability agent} that invokes \textbf{Captum Integrated Gradients} and \textbf{SHAP/LIME} to generate human-readable threat attribution reports for SOC analysts.}
+\resumeItem{Built a \textbf{React 19} frontend and \textbf{Express 5 / Prisma} backend with PostgreSQL and a three-node CockroachDB cluster; packaged six services in Docker Compose and deployed the frontend on Vercel.}
+\resumeItem{Implemented \textbf{Kafka/Redpanda fan-out-on-write} and Redis sorted-set timelines trimmed to \textbf{2,000 entries}; added JWT and Google OAuth, a Redis sliding-window rate limiter, Zod validation, Pino logging, and MinIO/S3 media storage.}
 \resumeItemListEnd
 
 \resumeProjectHeading
-{\textbf{BITS Social -- Production Social Media Backend} $|$ \emph{TypeScript, Express.js, PostgreSQL, Redis, Kafka, Docker}}
-{Apr 2025 -- Present}
+{\textbf{Phishing Detection \& Explainable Deep Learning}}{Aug 2024 -- Dec 2024}
 \resumeItemListStart
-\resumeItem{Architected a scalable Twitter-clone backend: \textbf{Express.js 5}, \textbf{Prisma ORM}, \textbf{PostgreSQL/CockroachDB} (3-node cluster), \textbf{Redis} sorted-set timelines, \textbf{Kafka} fan-out-on-write -- containerized via \textbf{Docker Compose} (6 services), deployed on \textbf{Vercel}; integrated \textbf{AI content moderation agent} for automated post screening.}
-\resumeItem{Built JWT + Google \textbf{OAuth 2.0}, \textbf{Redis sliding-window rate limiter}, \textbf{S3 media storage} (MinIO), Zod validation, structured logging -- 10+ RESTful modules for feeds, posts, follows, polls, and real-time notifications.}
+\resumeItem{Evaluated transformer embeddings with recurrent and feedforward classifiers; achieved \textbf{99.9\% accuracy with RoBERTa-LSTM} in the reported research evaluation.}
+\resumeItem{Used \textbf{Captum Integrated Gradients} for attribution and assessed explanation faithfulness; compared standalone and concatenated embeddings for phishing detection.}
 \resumeItemListEnd
 
 \resumeProjectHeading
-{\textbf{3D NoC Mapping \& TSV Optimization (M.E. Thesis)} $|$ \emph{Python, Gurobi ILP, Noxim Simulator}}
-{Feb 2025 -- Nov 2025}
+{\textbf{3D NoC Mapping \& TSV Optimization -- M.E. Thesis}}{Feb 2025 -- Nov 2025}
 \resumeItemListStart
-\resumeItem{Multi-objective optimization of IP core mapping + TSV placement in 3D Network-on-Chip; minimized communication cost and thermal hotspots; validated on \textbf{Noxim}-generated production-grade traffic traces.}
-\resumeItem{Implemented \textbf{Tabu Search} (with \textbf{agent-guided parameter tuning}) and \textbf{ILP} (Gurobi); Tabu achieved \textbf{95--98\%} of optimal quality with \textbf{10x} runtime reduction; outputs integrated into downstream EDA toolchain.}
+\resumeItem{Optimized IP-core mapping and TSV placement in 3D Network-on-Chip using \textbf{Tabu Search} and \textbf{Gurobi ILP}, targeting communication cost and thermal hotspots with Noxim simulation.}
+\resumeItem{Explored learning-based optimization with \textbf{Active Search, MPNN, and Pointer Networks}; the heuristic approach achieved \textbf{95--98\% of optimal quality with 10x lower runtime} in the reported evaluation.}
 \resumeItemListEnd
-
 \resumeSubHeadingListEnd
 
 \section{Technical Skills}
 \begin{itemize}[leftmargin=0.15in, label={}]
-\small{
-\item \textbf{Languages:} Python, C++, C, TypeScript, SQL \\
-\item \textbf{ML/AI:} PyTorch, scikit-learn, LightGBM, XGBoost, SVM, LSTM, Bi-LSTM, GRU, CNN, NLP, Transformers (BERT, RoBERTa), LangChain, AI Agents, RAG, SHAP, Captum, Optuna, MLflow, MLOps \\
-\item \textbf{Backend \& DevOps:} Node.js, Express.js, FastAPI, REST APIs, Prisma, Kafka, Redis, Docker, Vercel, AWS S3, CI/CD \\
-\item \textbf{Databases:} PostgreSQL, CockroachDB, MySQL \quad \textbf{Tools:} Git, Linux, DBeaver
-}
+\item \textbf{Languages:} Go, C++17, Python, TypeScript, C, SQL
+\item \textbf{Distributed Systems \& Security:} gRPC, Protobuf, streaming, durable execution, idempotency, OAuth 2.0, OIDC, PKCE, JWT/JWKS, RBAC, mTLS
+\item \textbf{AI \& ML:} LangChain, tool-calling agents, agent workflows, DeepSeek Harness, PyTorch, scikit-learn, LightGBM, Transformers, LSTM, Captum, Optuna, MLflow
+\item \textbf{Web \& Data:} React, Express, FastAPI, WebSockets, Prisma, PostgreSQL, CockroachDB, Redis, Kafka/Redpanda, LiveKit, Deepgram, MinIO/S3
+\item \textbf{Engineering:} Docker, Docker Compose, Git, Linux, Playwright, Meson/Ninja, CI/CD, monitoring and drift detection
 \end{itemize}
 
-\section{Publications}
-\resumeSubHeadingListStart
+\section{Publication}
 \resumeItemListStart
-\resumeItem{\textbf{PhishBuster} | EAI Broadnets 2024 | Published: Jan 2026 | DOI: \href{https://doi.org/10.1007/978-3-032-14350-1_4}{10.1007/978-3-032-14350-1\_4}}
+\resumeItem{\textbf{PhishBuster} -- EAI Broadnets 2024. Published \textbf{22 Jan 2026}. DOI: \href{https://doi.org/10.1007/978-3-032-14350-1_4}{10.1007/978-3-032-14350-1\_4}}
 \resumeItemListEnd
-\resumeSubHeadingListEnd
 
 \end{document}
