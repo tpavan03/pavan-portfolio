@@ -1,0 +1,17 @@
+services:
+  portfolio:
+    build:
+      context: .
+    image: pavan-portfolio:local
+    container_name: pavan-portfolio
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      CONTACT_DATA_DIR: /app/data
+    volumes:
+      - contact-data:/app/data
+
+volumes:
+  contact-data:

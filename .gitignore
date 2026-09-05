@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+dist
+coverage
+.DS_Store
+.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.contact-data/
+*.tsbuildinfo
+test-results/
+playwright-report/

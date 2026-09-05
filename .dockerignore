@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.env*
+!.env.example
+npm-debug.log*
+*.docx
+README.md
+
+.contact-data
+test-results
+playwright-report
+*.tsbuildinfo
+HOSTING_OPTIONS.md

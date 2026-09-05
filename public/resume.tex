@@ -1,0 +1,134 @@
+\documentclass[letterpaper,10.8pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.2in}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\normalsize
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\setlist[itemize]{leftmargin=*, itemsep=1.5pt, topsep=2pt}
+
+\newcommand{\resumeItem}[1]{\item \small{#1}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \small #2 \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-5pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \small #1 & \small #2 \\
+  \end{tabular*}\vspace{-5pt}
+}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-6pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-6pt}}
+
+\begin{document}
+
+\begin{center}
+{\Large \scshape T M V S G Pavan} \\
+\vspace{2pt}
+\small
+\faPhone\ 7730886127 ~
+\href{mailto:thokalapavan.pp@gmail.com}{\faEnvelope\ thokalapavan.pp@gmail.com} ~
+\href{https://www.linkedin.com/in/t-pavan03/}{\faLinkedin\ t-pavan03} ~
+\href{https://github.com/tpavan03}{\faGithub\ tpavan03}
+\vspace{-6pt}
+\end{center}
+
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Birla Institute of Technology and Science, Pilani (Goa Campus)}{2024 -- 2026}
+{M.E. Computer Science (CGPA: 9.55)}{Goa}
+\resumeSubheading
+{Sri Venkateswara University College of Engineering}{2020 -- 2024}
+{B.Tech Computer Science \& Engineering (CGPA: 8.6)}{Tirupati}
+\resumeSubHeadingListEnd
+
+\section{Experience}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Netskope}{Jan 2026 -- Present}
+{AI Intern -- Intrusion Prevention System (IPS) Team}{Bangalore}
+\resumeItemListStart
+\resumeItem{Designed a \textbf{multi-agent AI triage pipeline} using \textbf{LangChain} tool-calling agents -- orchestrator agent delegates to specialized tool agents (VirusTotal reputation, domain WHOIS age, User-Agent anomaly scoring, process behavior profiling) to autonomously classify tens of thousands of weekly IPS security alerts, achieving \textbf{80\%} reduction in manual analyst workload.}
+\resumeItem{Built a production ML pipeline ingesting \textbf{4.25M} events from \textbf{PostgreSQL}: multi-stage label conflict resolution, stratified downsampling, and \textbf{72} engineered features via \textbf{TF-IDF + Truncated SVD} (Latent Semantic Analysis) embeddings across URL, User-Agent, process, and hostname fields.}
+\resumeItem{Trained \textbf{LightGBM, XGBoost, Random Forest, SVM, LSTM, Bi-LSTM, GRU, FFNN} with \textbf{Optuna}; tracked experiments via \textbf{MLflow}; deployed as \textbf{Docker}-containerized \textbf{FastAPI} microservice with a \textbf{drift-monitoring agent} for automated retraining on evolving threat patterns.}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Projects}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Phishing Detection with AI Agents \& Explainable DL} $|$ \emph{PyTorch, RoBERTa, LangChain, FastAPI, Docker}}
+{Aug 2024 -- Dec 2024}
+\resumeItemListStart
+\resumeItem{Built an \textbf{agentic phishing detection pipeline}: LangChain orchestrator delegates URL feature extraction, transformer embedding generation (\textbf{BERT-CLS, RoBERTa, SBERT, USE, ALBERT}), and model selection to specialized tool agents -- deployed as a \textbf{FastAPI} microservice in \textbf{Docker} achieving \textbf{99.9\%} accuracy with RoBERTa-LSTM.}
+\resumeItem{Trained \textbf{FFNN, RNN, LSTM, Bi-LSTM, GRU} on standalone vs.\ concatenated embeddings; built an \textbf{explainability agent} that invokes \textbf{Captum Integrated Gradients} and \textbf{SHAP/LIME} to generate human-readable threat attribution reports for SOC analysts.}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{BITS Social -- Production Social Media Backend} $|$ \emph{TypeScript, Express.js, PostgreSQL, Redis, Kafka, Docker}}
+{Apr 2025 -- Present}
+\resumeItemListStart
+\resumeItem{Architected a scalable Twitter-clone backend: \textbf{Express.js 5}, \textbf{Prisma ORM}, \textbf{PostgreSQL/CockroachDB} (3-node cluster), \textbf{Redis} sorted-set timelines, \textbf{Kafka} fan-out-on-write -- containerized via \textbf{Docker Compose} (6 services), deployed on \textbf{Vercel}; integrated \textbf{AI content moderation agent} for automated post screening.}
+\resumeItem{Built JWT + Google \textbf{OAuth 2.0}, \textbf{Redis sliding-window rate limiter}, \textbf{S3 media storage} (MinIO), Zod validation, structured logging -- 10+ RESTful modules for feeds, posts, follows, polls, and real-time notifications.}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{3D NoC Mapping \& TSV Optimization (M.E. Thesis)} $|$ \emph{Python, Gurobi ILP, Noxim Simulator}}
+{Feb 2025 -- Nov 2025}
+\resumeItemListStart
+\resumeItem{Multi-objective optimization of IP core mapping + TSV placement in 3D Network-on-Chip; minimized communication cost and thermal hotspots; validated on \textbf{Noxim}-generated production-grade traffic traces.}
+\resumeItem{Implemented \textbf{Tabu Search} (with \textbf{agent-guided parameter tuning}) and \textbf{ILP} (Gurobi); Tabu achieved \textbf{95--98\%} of optimal quality with \textbf{10x} runtime reduction; outputs integrated into downstream EDA toolchain.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small{
+\item \textbf{Languages:} Python, C++, C, TypeScript, SQL \\
+\item \textbf{ML/AI:} PyTorch, scikit-learn, LightGBM, XGBoost, SVM, LSTM, Bi-LSTM, GRU, CNN, NLP, Transformers (BERT, RoBERTa), LangChain, AI Agents, RAG, SHAP, Captum, Optuna, MLflow, MLOps \\
+\item \textbf{Backend \& DevOps:} Node.js, Express.js, FastAPI, REST APIs, Prisma, Kafka, Redis, Docker, Vercel, AWS S3, CI/CD \\
+\item \textbf{Databases:} PostgreSQL, CockroachDB, MySQL \quad \textbf{Tools:} Git, Linux, DBeaver
+}
+\end{itemize}
+
+\section{Publications}
+\resumeSubHeadingListStart
+\resumeItemListStart
+\resumeItem{\textbf{PhishBuster} | EAI Broadnets 2024 | Published: Jan 2026 | DOI: \href{https://doi.org/10.1007/978-3-032-14350-1_4}{10.1007/978-3-032-14350-1\_4}}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\end{document}
