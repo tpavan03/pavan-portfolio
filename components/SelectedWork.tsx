@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ScreenshotPreview from "@/components/ScreenshotPreview";
 import { projects } from "@/data/portfolio";
 const categories = ["All work", "AI & security", "Systems & research"];
 const artIndex = { social: 0, security: 1, chip: 2, agents: 3 };
@@ -112,6 +113,7 @@ export default function SelectedWork({
                 </ul>
               </details>
               <div className="project-links">
+                {p.image && <ScreenshotPreview src={p.image} title={p.title} />}
                 {p.github && (
                   <a href={p.github} target="_blank" rel="noreferrer">
                     Source code ↗
@@ -126,6 +128,7 @@ export default function SelectedWork({
                     Local demo ↗
                   </a>
                 )}
+                {p.download && <a href={p.download}>Download debug APK ↓</a>}
                 {p.release && (
                   <a href={p.release} target="_blank" rel="noreferrer">
                     Release ↗

@@ -13,7 +13,7 @@ export default function Home() {
       <section className="hero shell">
         <div className="hero-meta">
           <span>
-            <i className="status-dot" /> AI ENGINEER / AGENTIC SYSTEMS
+            <i className="status-dot" /> AI &amp; ML ENGINEER / AGENTIC SYSTEMS
           </span>
           <span>BANGALORE, INDIA · IST</span>
         </div>
@@ -152,9 +152,9 @@ export default function Home() {
             </div>
             <div>
               <strong>
-                10<span>×</span>
+                80<span>%</span>
               </strong>
-              <p>Thesis optimization runtime reduction</p>
+              <p>Reported reduction in manual triage</p>
             </div>
           </div>
         </div>
@@ -195,6 +195,68 @@ export default function Home() {
           <a className="button-text" href="/resume.pdf" download>
             Download full résumé ↓
           </a>
+        </div>
+      </section>
+      <section className="shell systems-section" id="systems">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              BENEATH THE INTELLIGENCE / SYSTEMS FOUNDATIONS
+            </p>
+            <h2>Deep in the systems.</h2>
+          </div>
+          <p>
+            Scheduling, kernels, and distributed state.
+            <br />
+            The foundations behind dependable AI infrastructure.
+          </p>
+        </div>
+        <div className="systems-list">
+          {[
+            [
+              "01",
+              "Real-time scheduling",
+              "C · FreeRTOS · EDF / LA-EDF",
+              "Deadline-based priorities and look-ahead scheduling simulations.",
+              "rtos-edf-laedf-scheduler",
+            ],
+            [
+              "02",
+              "Kernel-to-userspace audio",
+              "C · Linux · Netlink · ALSA",
+              "An operating-systems project exploring system calls and programmable audio.",
+              "linux-kernel-syscall-audio-controller-main",
+            ],
+            [
+              "03",
+              "NFS protocol simulation",
+              "C · File handles · Durable state",
+              "Stale handles, write/commit semantics, and stateful compound operations.",
+              "nfs-protocol-sim",
+            ],
+            [
+              "04",
+              "Disk scheduling analysis",
+              "DiskSim · SSTF · Trace analysis",
+              "Access-time, seek-latency, and queue statistics from a disk scheduling simulation.",
+              "distributed-systems-disk-scheduling",
+            ],
+          ].map(([n, title, tech, description, repo]) => (
+            <a
+              key={repo}
+              href={`https://github.com/tpavan03/${repo}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>{n}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+              <small>{tech}</small>
+              <b>↗</b>
+            </a>
+          ))}
         </div>
       </section>
       <section className="shell stack-section">

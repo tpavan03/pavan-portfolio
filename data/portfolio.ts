@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "T M V S G Pavan",
   shortName: "Pavan",
-  role: "AI Engineer",
-  headline: "AI Engineer | Agentic Systems, Voice AI & Secure Platforms",
+  role: "AI & ML Engineer",
+  headline: "AI & ML Engineer | Agentic Systems, Voice AI & Secure Platforms",
   heroTagline:
     "I build AI agents and the systems that make them dependable: tool-calling workflows, real-time voice, secure multi-tenant runtimes, and applied machine learning.",
   bio: "My work spans the full agent lifecycle: orchestration, tool execution, human approvals, streaming, voice, and recovery. At XFactr, I build distributed AI platforms and AgentHRMS, bringing Python, Go, C++ and React together to turn agent capabilities into usable products.",
@@ -34,6 +34,7 @@ export type Project = {
   demoPort?: number;
   image?: string;
   release?: string;
+  download?: string;
   github?: string;
   publication?: string;
 };
@@ -55,7 +56,7 @@ export type Education = {
 export const experiences: Experience[] = [
   {
     company: "XFactr Softwares Private Limited",
-    role: "Software Engineer — Distributed Systems & AI Platforms",
+    role: "AI & ML Engineer — Distributed Systems & AI Platforms",
     duration: "Jul 2026 – Present",
     location: "Bangalore · Xfactr.ai",
     points: [
@@ -101,17 +102,19 @@ export const experiences: Experience[] = [
   },
   {
     company: "BITS Pilani Digital",
-    role: "Teaching Assistant — Machine Learning & Data Pre-processing",
-    duration: "Jun 2025 – Dec 2025",
+    role: "Content Developer & Teaching Assistant — Data & Machine Learning",
+    duration: "Jun 2025 – Jul 2026",
     location: "BITS Pilani Digital",
     points: [
-      "Designed curricula and evaluations for MSc Data Pre-processing and Machine Learning, and managed assessments for 300+ students with automated grading pipelines.",
+      "Developed learning content for Data Pre-processing, Machine Learning, Unsupervised Learning, and selected Data Mining topics, including presentation decks, written learning assets, quizzes, discussion prompts, and practice-lab exercises.",
+      "Served as Teaching Assistant for Data Pre-processing across multiple trimesters, supporting 500+ students per trimester through technical query resolution, assessment administration, answer-script correction, feedback, and consistent evaluation.",
     ],
     tech: [
       "Machine Learning",
       "Data Pre-processing",
       "Curriculum Design",
-      "Assessment Automation",
+      "Experiential Learning",
+      "Assessment & Feedback",
     ],
   },
 ];
@@ -158,22 +161,30 @@ export const projects: Project[] = [
     context: "Professional work · XFactr",
   },
   {
-    title: "Phishing Detection & Explainable AI",
-    subtitle: "PhishBuster · Published research",
+    title: "PhishBuster / PhishScope",
+    subtitle: "Explainable research → inspectable workflows",
     description:
-      "URL embeddings and deep learning for phishing classification, with explanations checked for faithfulness.",
+      "Phishing research extended into an interactive URL-analysis desk with conditional tool execution, evidence traces, and human review.",
     highlights: [
+      "PhishScope orchestrates five local analysis stages and, when a user opts in, requests existing URL/domain reputation from fixed VirusTotal and Google Safe Browsing endpoints. It never opens the submitted website.",
+      "A transparent policy combines local evidence, available provider observations, and a clearly separated human review into one explained decision. Provider failures preserve the offline result.",
       "Combined BERT-CLS, SBERT, USE, RoBERTa and ALBERT URL embeddings with dataset features, comparing standalone and concatenated representations.",
       "Trained FFNN, RNN and LSTM models; the supplied research results report 99.9% accuracy for the RoBERTa-based LSTM.",
       "Applied Captum Integrated Gradients and faithfulness checks to assess explanations. Public repository contains the research notebooks; the paper is published in EAI Broadnets 2024.",
+      "API keys exist only in the current page and request; the server never persists or logs them. The live scorer uses deterministic orchestration rather than an LLM or research classifier, so the 99.9% research result is not a demo performance claim.",
     ],
     tech: ["Python", "RoBERTa", "LSTM", "Captum", "Transformers"],
     category: "AI & security",
     art: "security",
     featured: true,
-    context: "Research · Aug–Dec 2024",
-    github: "https://github.com/tpavan03/Phishing-Detection",
+    context: "Research + working local demo",
+    github:
+      "https://github.com/tpavan03/Phishing-Detection/tree/feat/phishbuster-agent-workflow-20260906",
     publication: "PhishBuster @ EAI Broadnets 2024",
+    image: "/projects/phishscope.png",
+    demoPort: 3102,
+    release:
+      "https://github.com/tpavan03/Phishing-Detection/releases/tag/phishbuster-v2.1.0-demo",
   },
   {
     title: "BITS Social",
@@ -181,9 +192,11 @@ export const projects: Project[] = [
     description:
       "A campus social platform with event-driven feeds, authenticated APIs, media storage, and a React frontend.",
     highlights: [
+      "The Campus Desk release adds a local demo identity, seeded fictional feed, persisted moderation cases, explainable policy signals, and a single-decision human-review audit trail backed by the original Prisma data model.",
       "Built with Express.js 5, Prisma, PostgreSQL/CockroachDB, Redis and Kafka/Redpanda; containerized the backend with Docker Compose and deployed the frontend on Vercel.",
       "Engineered fan-out-on-write timelines with Kafka consumers and Redis sorted sets, with feed trimming at 2,000 entries per user.",
       "Implemented JWT and Google OAuth 2.0, Redis sliding-window rate limits, Zod validation, Pino logs and S3-compatible MinIO media storage across feeds, posts, follows, polls and notifications.",
+      "The local release uses PostgreSQL and Redis with a compact event-bus fallback; production Kafka/Redpanda and Google OAuth remain part of the broader architecture. Moderation is rule-based and does not claim an LLM.",
     ],
     tech: [
       "TypeScript",
@@ -197,8 +210,13 @@ export const projects: Project[] = [
     category: "Systems & research",
     art: "social",
     featured: true,
-    context: "Personal project",
-    github: "https://github.com/tpavan03/bits-campus-social-network-main",
+    context: "Personal project · Working local demo",
+    github:
+      "https://github.com/tpavan03/bits-campus-social-network-main/tree/feat/bits-social-campus-desk-20260906",
+    release:
+      "https://github.com/tpavan03/bits-campus-social-network-main/releases/tag/bits-social-v2.0.0-demo",
+    demoPort: 3101,
+    image: "/projects/bits-social.png",
   },
   {
     title: "AI Alert Triage",
@@ -213,7 +231,7 @@ export const projects: Project[] = [
     tech: ["LangChain", "Python", "LightGBM", "LSTM", "Optuna", "Docker"],
     category: "AI & security",
     art: "agents",
-    featured: true,
+    featured: false,
     context: "Professional work · Netskope",
   },
   {
@@ -236,8 +254,55 @@ export const projects: Project[] = [
     ],
     category: "Systems & research",
     art: "chip",
-    featured: true,
+    featured: false,
     context: "Research · Feb–Nov 2025",
+  },
+  {
+    title: "Digital Wellbeing — Local Insights",
+    subtitle: "Private, on-device behavior analytics",
+    description:
+      "A native Android dashboard that turns real usage-event intervals into transparent screen-time patterns, personal goals, and reflective prompts.",
+    highlights: [
+      "Rebuilt usage accounting around foreground/background event intervals, including ongoing sessions, midnight boundaries, unlock de-duplication, after-hours overlap, and daylight-saving transitions.",
+      "Added a seven-day interactive trend, selectable daily app breakdown, personal time goal, and an explicitly labeled fictional sample mode for trying the app before granting usage access.",
+      "Runs the bundled experimental model on-device and explains its boundary; removed fabricated confidence overrides and clinical or diagnostic wording. No account, analytics SDK, or cloud backend is required.",
+      "Sixteen pure-Kotlin tests, two Android device flows, lint, and a debug APK build passed on an API 35 emulator. The downloadable APK is debug-signed for evaluation rather than store distribution.",
+    ],
+    tech: ["Kotlin", "Android", "LiteRT", "On-device ML", "Privacy"],
+    category: "AI & security",
+    art: "agents",
+    featured: true,
+    context: "Android · Tested debug release",
+    github:
+      "https://github.com/tpavan03/digital-wellbeing-analyzer/tree/feat/wellbeing-local-insights-20260906",
+    release:
+      "https://github.com/tpavan03/digital-wellbeing-analyzer/releases/tag/wellbeing-v2.0.0-demo",
+    download:
+      "https://github.com/tpavan03/digital-wellbeing-analyzer/releases/download/wellbeing-v2.0.0-demo/wellbeing-2.0.0-demo-debug.apk",
+    image: "/projects/digital-wellbeing.png",
+  },
+  {
+    title: "Image Trust Desk",
+    subtitle: "Signed attestations & admission decisions",
+    description:
+      "An interactive supply-chain policy lab that checks every workload container and explains why an image is allowed or denied.",
+    highlights: [
+      "Replaced a hardcoded-image prototype with policy checks for regular, init and ephemeral containers. A single failed container rejects the workload.",
+      "Verifies Ed25519 signatures over exact digest-bound subjects, trusted signers, registry allowlists and attestation validity windows.",
+      "Supports AdmissionReview v1 envelopes and dry-run behavior, with Docker-persisted decision history. Twelve unit/API tests and desktop/mobile browser scenarios passed.",
+      "Local fictional fixtures demonstrate signature policy. This is not a live cluster deployment, image-byte scanner, Cosign/Rekor integration or AI model.",
+    ],
+    tech: ["Node.js", "Ed25519", "AdmissionReview", "Docker", "Security"],
+    category: "AI & security",
+    art: "security",
+    featured: true,
+    context: "Security infrastructure · Local demo",
+    github:
+      "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/tree/feat/image-trust-desk-20260906",
+    release:
+      "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/releases/tag/image-trust-v2.0.0-demo",
+    demoPort: 3104,
+    image: "/projects/image-trust.png",
   },
 ];
 

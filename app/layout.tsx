@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/data/portfolio";
 export const metadata: Metadata = {
-  title: "Pavan — AI Engineer & Agentic Systems",
+  title: "Pavan — AI & ML Engineer | Agentic Systems",
   description: siteConfig.heroTagline,
 };
 export default function RootLayout({

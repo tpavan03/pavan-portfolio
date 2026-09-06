@@ -1436,3 +1436,127 @@ main:not(#main-content) [class*="border-white/"] {
   display: inline-block;
   margin-top: 40px;
 }
+.systems-section {
+  padding: 0 0 65px;
+}
+.systems-section h2 {
+  font-size: clamp(35px, 4vw, 54px);
+  letter-spacing: -2px;
+  font-weight: 500;
+  margin: 0;
+}
+.systems-list > a {
+  display: grid;
+  grid-template-columns: 40px 1.3fr 1fr 25px;
+  gap: 20px;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.systems-list > a:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.systems-list > a > span {
+  font: 11px monospace;
+  color: var(--muted);
+}
+.systems-list h3 {
+  font-size: 19px;
+  font-weight: 500;
+  margin: 0 0 7px;
+}
+.systems-list p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+.systems-list small {
+  font: 10px/1.8 monospace;
+  color: var(--muted);
+}
+.systems-list b {
+  font-size: 21px;
+  font-weight: 400;
+}
+.systems-list a:hover h3 {
+  color: var(--accent-text);
+}
+@media (max-width: 700px) {
+  .systems-list > a {
+    grid-template-columns: 24px 1fr 20px;
+    gap: 12px;
+  }
+  .systems-list small {
+    grid-column: 2;
+  }
+  .systems-list b {
+    grid-column: 3;
+    grid-row: auto;
+  }
+  .systems-list h3 {
+    font-size: 18px;
+  }
+}
+.project-links > button {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 5px;
+  color: var(--ink);
+  font-size: 12px;
+}
+.screenshot-dialog {
+  background: transparent;
+  border: 0;
+  width: min(1200px, 94vw);
+  max-height: 90vh;
+  padding: 0;
+  color: var(--ink);
+  border-radius: 12px;
+  overflow: auto;
+}
+.screenshot-dialog::backdrop {
+  background: #0a0d10bb;
+  backdrop-filter: blur(6px);
+}
+.screenshot-frame {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.screenshot-frame > div {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  gap: 15px;
+  border-bottom: 1px solid var(--line);
+}
+.screenshot-frame p {
+  margin: 0;
+  font-size: 15px;
+}
+.screenshot-frame p span {
+  display: block;
+  font: 10px monospace;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.screenshot-frame button {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12px;
+}
+.screenshot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
