@@ -1,9 +1,16 @@
 "use client";
 import { useState } from "react";
+import ScreenshotPreview from "@/components/ScreenshotPreview";
 import { projects } from "@/data/portfolio";
 const categories = ["All work", "AI & security", "Systems & research"];
-export default function SelectedWork() {
+const artIndex = { social: 0, security: 1, chip: 2, agents: 3 };
+export default function SelectedWork({
+  featuredOnly = false,
+}: {
+  featuredOnly?: boolean;
+}) {
   const [filter, setFilter] = useState("All work");
+  const available = projects.filter((p) => !featuredOnly || p.featured);
   return (
     <>
       <div className="work-filters" aria-label="Filter projects">
@@ -19,60 +26,67 @@ export default function SelectedWork() {
         ))}
       </div>
       <div className="project-grid">
-        {projects
-          .map((p, i) => ({ p, i }))
-          .filter(
-            ({ i }) =>
-              filter === "All work" ||
-              (filter === "AI & security"
-                ? [1, 3].includes(i)
-                : [0, 2].includes(i)),
-          )
-          .map(({ p, i }) => (
+        {available
+          .filter((p) => filter === "All work" || p.category === filter)
+          .map((p, i) => (
             <article className="project" key={p.title}>
-              <div className={`project-art art-${i}`} aria-hidden="true">
-                <span className="art-label">
-                  {
-                    [
-                      "DISTRIBUTED SYSTEMS",
-                      "INTELLIGENT SECURITY",
-                      "COMPUTATIONAL RESEARCH",
-                      "AGENTIC AI",
-                    ][i]
-                  }
-                </span>
-                {i === 0 ? (
-                  <div className="social-diagram">
-                    <div className="social-node">
-                      B<span>social</span>
-                    </div>
-                    <div className="diagram-line" />
-                    <div className="mini-nodes">
-                      <span>API</span>
-                      <span>STREAM</span>
-                      <span>CACHE</span>
-                    </div>
-                  </div>
-                ) : i === 1 ? (
-                  <div className="shield">
-                    <span>✳</span>
-                    <small>PhishBuster</small>
-                    <div className="scan-line" />
-                  </div>
-                ) : i === 2 ? (
-                  <div className="chip-grid">
-                    {Array.from({ length: 25 }, (_, n) => (
-                      <i key={n} />
-                    ))}
-                  </div>
+              <div
+                className={`project-art art-${artIndex[p.art]}`}
+                aria-hidden="true"
+              >
+                {p.image ? (
+                  <img
+                    className="project-screenshot"
+                    src={p.image}
+                    alt=""
+                    loading="lazy"
+                  />
                 ) : (
-                  <div className="agent-diagram">
-                    <span>OBSERVE</span>
-                    <b>✳</b>
-                    <span>REASON → ACT</span>
-                  </div>
+                  <>
+                    <span className="art-label">
+                      {p.category.toUpperCase()}
+                    </span>
+                    {p.art === "social" ? (
+                      <div className="social-diagram">
+                        <div className="social-node">
+                          B<span>social</span>
+                        </div>
+                        <div className="diagram-line" />
+                        <div className="mini-nodes">
+                          <span>API</span>
+                          <span>STREAM</span>
+                          <span>CACHE</span>
+                        </div>
+                      </div>
+                    ) : p.art === "security" ? (
+                      <div className="shield">
+                        <span>✳</span>
+                        <small>
+                          {p.title.includes("Phishing")
+                            ? "PhishBuster"
+                            : "TRUST / VERIFY"}
+                        </small>
+                        <div className="scan-line" />
+                      </div>
+                    ) : p.art === "chip" ? (
+                      <div className="chip-grid">
+                        {Array.from({ length: 25 }, (_, n) => (
+                          <i key={n} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="agent-diagram">
+                        <span>OBSERVE</span>
+                        <b>✳</b>
+                        <span>REASON → ACT</span>
+                      </div>
+                    )}
+                    <span className="art-index">
+                      {String(i + 1).padStart(2, "0")} /{" "}
+                      {p.context.toUpperCase()}
+                    </span>
+                  </>
                 )}
-                <span className="art-index">0{i + 1} / SELECTED WORK</span>
               </div>
               <div className="project-heading">
                 <div>
@@ -81,9 +95,10 @@ export default function SelectedWork() {
                 </div>
                 <span className="project-arrow">↗</span>
               </div>
+              <p className="project-context">{p.context}</p>
               <p className="project-description">{p.description}</p>
               <div className="tags">
-                {p.tech.slice(0, 4).map((t) => (
+                {p.tech.slice(0, 5).map((t) => (
                   <span key={t}>{t}</span>
                 ))}
               </div>
@@ -96,18 +111,41 @@ export default function SelectedWork() {
                     <li key={h}>{h}</li>
                   ))}
                 </ul>
+              </details>
+              <div className="project-links">
+                {p.image && <ScreenshotPreview src={p.image} title={p.title} />}
                 {p.github && (
                   <a href={p.github} target="_blank" rel="noreferrer">
-                    GitHub profile ↗
+                    Source code ↗
+                  </a>
+                )}
+                {p.demoPort && (
+                  <a
+                    href={`http://localhost:${p.demoPort}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Local demo ↗
+                  </a>
+                )}
+                {p.download && <a href={p.download}>Download debug APK ↓</a>}
+                {p.release && (
+                  <a href={p.release} target="_blank" rel="noreferrer">
+                    Release ↗
                   </a>
                 )}
                 {p.publication && (
                   <a href="/publications">Read publication ↗</a>
                 )}
-              </details>
+              </div>
             </article>
           ))}
       </div>
+      {featuredOnly && (
+        <a className="button-text all-projects" href="/projects">
+          Explore the full project collection ↗
+        </a>
+      )}
     </>
   );
 }

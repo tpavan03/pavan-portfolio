@@ -4,13 +4,14 @@ Requires: python3 -m pip install reportlab
 import re
 from pathlib import Path
 from html import escape
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
 
 root = Path(__file__).resolve().parents[1]
 source = (root / 'public/resume.tex').read_text()
+source = re.sub(r'(?<!\\)%[^\n]*', '', source)
 
 def group(text, start):
     assert text[start] == '{'
@@ -36,17 +37,22 @@ sub = ParagraphStyle('sub', parent=body, fontName='Helvetica-Bold', fontSize=8.5
 bullet = ParagraphStyle('bullet', parent=body, leftIndent=9, firstLineIndent=-7)
 flow = [Paragraph('T M V S G Pavan', ParagraphStyle('name', parent=heading, alignment=TA_CENTER, fontSize=20, leading=25, spaceBefore=0)),
         Paragraph('7730886127 · <link href="mailto:thokalapavan.pp@gmail.com">thokalapavan.pp@gmail.com</link><br/><link href="https://www.linkedin.com/in/t-pavan03/">linkedin.com/in/t-pavan03</link> · <link href="https://github.com/tpavan03">github.com/tpavan03</link>', ParagraphStyle('contact', parent=body, alignment=TA_CENTER)), Spacer(1,3)]
-text = source[source.index('\\section{Education}'):]
-pattern = re.compile(r'\\(section|resumeSubheading|resumeProjectHeading|resumeItem)\s*\{')
+text = source[source.index('\\section{Experience}'):]
+pattern = re.compile(r'\\(section|resumeSubheading|resumeProjectHeading|resumeItem)\s*\{|\\(newpage)')
 pos = 0
 while match := pattern.search(text, pos):
+    if match.group(2):
+        flow.append(PageBreak())
+        pos = match.end()
+        continue
     cmd = match.group(1)
     value, pos = group(text, match.end()-1)
     if cmd == 'section':
         flow.append(Paragraph(clean(value).upper(), heading))
         if value == 'Technical Skills':
-            end = text.find('\\section{Publications}', pos)
-            for item in re.findall(r'\\item (.*?)(?=\\item|\n\})', text[pos:end], re.S):
+            end = text.find('\\end{itemize}', pos)
+            if end < 0: raise ValueError('Technical skills list has no end')
+            for item in re.findall(r'\\item (.*?)(?=\\item|$)', text[pos:end], re.S):
                 flow.append(Paragraph(clean(item), body))
             pos = end
     elif cmd in ['resumeSubheading', 'resumeProjectHeading']:

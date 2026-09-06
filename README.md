@@ -58,3 +58,15 @@ docker compose exec portfolio cat /app/data/messages.jsonl
 ```
 
 The file is created after the first valid contact submission. It is not exposed by a public API. To rebuild the resume, install Python ReportLab and run `python3 scripts/generate-resume.py`.
+
+## Local project showcase
+
+The upgraded projects are separate repositories on unique feature branches; see [PROJECT_RELEASES.md](PROJECT_RELEASES.md) for source and release links. The screenshots in `public/projects/` come from the actual applications. Light mode is the default; the night-mode preference is stored in the browser.
+
+In this workspace, after Docker starts, use:
+
+```bash
+./scripts/start-local-showcase.sh
+```
+
+The script expects sibling checkouts under `../../projects` (override `PROJECTS_ROOT` if needed). It starts the portfolio and the BITS Social, PhishScope and Image Trust Desk containers. It does not launch an Android emulator; download the Digital Wellbeing APK from its release and install it on a compatible Android device. Cloud deployment requires replacing the clearly labeled local demo URLs with public HTTPS URLs; see the hosting guide.

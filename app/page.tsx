@@ -13,7 +13,7 @@ export default function Home() {
       <section className="hero shell">
         <div className="hero-meta">
           <span>
-            <i className="status-dot" /> AI / ML ENGINEER
+            <i className="status-dot" /> AI &amp; ML ENGINEER / AGENTIC SYSTEMS
           </span>
           <span>BANGALORE, INDIA · IST</span>
         </div>
@@ -26,10 +26,10 @@ export default function Home() {
               Engineered<span className="orange">.</span>
             </h1>
             <p className="hero-description">
-              I turn complex problems into intelligent systems.
-              <br className="desktop-break" /> Applied AI, thoughtful
-              infrastructure, and code
-              <br className="desktop-break" /> that works beyond the notebook.
+              I build agents that reason, act, and work with people.
+              <br className="desktop-break" /> Tool-calling workflows, voice AI,
+              <br className="desktop-break" /> and the systems that make them
+              dependable.
             </p>
             <div className="hero-actions">
               <a className="button-primary" href="#work">
@@ -77,8 +77,8 @@ export default function Home() {
       </section>
       <div className="marquee" aria-label="Specialties">
         <div>
-          APPLIED AI <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> MACHINE
-          LEARNING <span>✳</span> INTELLIGENT SECURITY <span>✳</span>
+          AGENTIC AI <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> VOICE
+          INTELLIGENCE <span>✳</span> INTELLIGENT SECURITY <span>✳</span>
         </div>
       </div>
       <section className="shell section" id="work">
@@ -97,7 +97,7 @@ export default function Home() {
             machine intelligence and real-world impact.
           </p>
         </div>
-        <SelectedWork />
+        <SelectedWork featuredOnly />
       </section>
       <section className="experience-section" id="experience">
         <div className="shell section">
@@ -152,9 +152,9 @@ export default function Home() {
             </div>
             <div>
               <strong>
-                10<span>×</span>
+                80<span>%</span>
               </strong>
-              <p>Thesis optimization runtime reduction</p>
+              <p>Reported reduction in manual triage</p>
             </div>
           </div>
         </div>
@@ -197,6 +197,68 @@ export default function Home() {
           </a>
         </div>
       </section>
+      <section className="shell systems-section" id="systems">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              BENEATH THE INTELLIGENCE / SYSTEMS FOUNDATIONS
+            </p>
+            <h2>Deep in the systems.</h2>
+          </div>
+          <p>
+            Scheduling, kernels, and distributed state.
+            <br />
+            The foundations behind dependable AI infrastructure.
+          </p>
+        </div>
+        <div className="systems-list">
+          {[
+            [
+              "01",
+              "Real-time scheduling",
+              "C · FreeRTOS · EDF / LA-EDF",
+              "Deadline-based priorities and look-ahead scheduling simulations.",
+              "rtos-edf-laedf-scheduler",
+            ],
+            [
+              "02",
+              "Kernel-to-userspace audio",
+              "C · Linux · Netlink · ALSA",
+              "An operating-systems project exploring system calls and programmable audio.",
+              "linux-kernel-syscall-audio-controller-main",
+            ],
+            [
+              "03",
+              "NFS protocol simulation",
+              "C · File handles · Durable state",
+              "Stale handles, write/commit semantics, and stateful compound operations.",
+              "nfs-protocol-sim",
+            ],
+            [
+              "04",
+              "Disk scheduling analysis",
+              "DiskSim · SSTF · Trace analysis",
+              "Access-time, seek-latency, and queue statistics from a disk scheduling simulation.",
+              "distributed-systems-disk-scheduling",
+            ],
+          ].map(([n, title, tech, description, repo]) => (
+            <a
+              key={repo}
+              href={`https://github.com/tpavan03/${repo}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>{n}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+              <small>{tech}</small>
+              <b>↗</b>
+            </a>
+          ))}
+        </div>
+      </section>
       <section className="shell stack-section">
         <p className="eyebrow">THE TOOLKIT / CHOSEN FOR THE PROBLEM</p>
         <div className="stack-grid">
@@ -233,7 +295,7 @@ export default function Home() {
           </h2>
           <div className="contact-bottom">
             <p>
-              AI products, scalable systems, or a good conversation.
+              AI agents, intelligent products, or a good conversation.
               <br />
               I’d love to hear what you’re working on.
             </p>

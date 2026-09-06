@@ -57,6 +57,9 @@ export default function Contact() {
           {copied ? "Email address copied" : ""}
         </span>
       </div>
+      <a className="phone-contact" href={`tel:+91${siteConfig.phone}`}>
+        Call +91 {siteConfig.phone} ↗
+      </a>
       <button
         className="message-toggle"
         aria-expanded={open}
