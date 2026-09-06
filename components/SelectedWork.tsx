@@ -119,15 +119,6 @@ export default function SelectedWork({
                     Source code ↗
                   </a>
                 )}
-                {p.demoPort && (
-                  <a
-                    href={`http://localhost:${p.demoPort}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Local demo ↗
-                  </a>
-                )}
                 {p.download && <a href={p.download}>Download debug APK ↓</a>}
                 {p.release && (
                   <a href={p.release} target="_blank" rel="noreferrer">

@@ -31,7 +31,6 @@ export type Project = {
   description: string;
   highlights: string[];
   tech: string[];
-  demoPort?: number;
   image?: string;
   release?: string;
   download?: string;
@@ -177,12 +176,11 @@ export const projects: Project[] = [
     category: "AI & security",
     art: "security",
     featured: true,
-    context: "Research + working local demo",
+    context: "Research · Interactive workflow",
     github:
       "https://github.com/tpavan03/Phishing-Detection/tree/feat/phishbuster-agent-workflow-20260906",
     publication: "PhishBuster @ EAI Broadnets 2024",
     image: "/projects/phishscope.png",
-    demoPort: 3102,
     release:
       "https://github.com/tpavan03/Phishing-Detection/releases/tag/phishbuster-v2.1.0-demo",
   },
@@ -192,11 +190,11 @@ export const projects: Project[] = [
     description:
       "A campus social platform with event-driven feeds, authenticated APIs, media storage, and a React frontend.",
     highlights: [
-      "The Campus Desk release adds a local demo identity, seeded fictional feed, persisted moderation cases, explainable policy signals, and a single-decision human-review audit trail backed by the original Prisma data model.",
+      "The Campus Desk release adds a sandbox identity, seeded fictional feed, persisted moderation cases, explainable policy signals, and a single-decision human-review audit trail backed by the original Prisma data model.",
       "Built with Express.js 5, Prisma, PostgreSQL/CockroachDB, Redis and Kafka/Redpanda; containerized the backend with Docker Compose and deployed the frontend on Vercel.",
       "Engineered fan-out-on-write timelines with Kafka consumers and Redis sorted sets, with feed trimming at 2,000 entries per user.",
       "Implemented JWT and Google OAuth 2.0, Redis sliding-window rate limits, Zod validation, Pino logs and S3-compatible MinIO media storage across feeds, posts, follows, polls and notifications.",
-      "The local release uses PostgreSQL and Redis with a compact event-bus fallback; production Kafka/Redpanda and Google OAuth remain part of the broader architecture. Moderation is rule-based and does not claim an LLM.",
+      "The Docker release uses PostgreSQL and Redis with a compact event-bus fallback; production Kafka/Redpanda and Google OAuth remain part of the broader architecture. Moderation is rule-based and does not claim an LLM.",
     ],
     tech: [
       "TypeScript",
@@ -210,12 +208,11 @@ export const projects: Project[] = [
     category: "Systems & research",
     art: "social",
     featured: true,
-    context: "Personal project · Working local demo",
+    context: "Personal project · Full-stack platform",
     github:
       "https://github.com/tpavan03/bits-campus-social-network-main/tree/feat/bits-social-campus-desk-20260906",
     release:
       "https://github.com/tpavan03/bits-campus-social-network-main/releases/tag/bits-social-v2.0.0-demo",
-    demoPort: 3101,
     image: "/projects/bits-social.png",
   },
   {
@@ -290,18 +287,17 @@ export const projects: Project[] = [
       "Replaced a hardcoded-image prototype with policy checks for regular, init and ephemeral containers. A single failed container rejects the workload.",
       "Verifies Ed25519 signatures over exact digest-bound subjects, trusted signers, registry allowlists and attestation validity windows.",
       "Supports AdmissionReview v1 envelopes and dry-run behavior, with Docker-persisted decision history. Twelve unit/API tests and desktop/mobile browser scenarios passed.",
-      "Local fictional fixtures demonstrate signature policy. This is not a live cluster deployment, image-byte scanner, Cosign/Rekor integration or AI model.",
+      "Fictional test fixtures demonstrate signature policy. This is not a live cluster deployment, image-byte scanner, Cosign/Rekor integration or AI model.",
     ],
     tech: ["Node.js", "Ed25519", "AdmissionReview", "Docker", "Security"],
     category: "AI & security",
     art: "security",
     featured: true,
-    context: "Security infrastructure · Local demo",
+    context: "Security infrastructure · Policy lab",
     github:
       "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/tree/feat/image-trust-desk-20260906",
     release:
       "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/releases/tag/image-trust-v2.0.0-demo",
-    demoPort: 3104,
     image: "/projects/image-trust.png",
   },
 ];
