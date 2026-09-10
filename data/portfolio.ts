@@ -31,7 +31,6 @@ export type Project = {
   description: string;
   highlights: string[];
   tech: string[];
-  image?: string;
   release?: string;
   download?: string;
   github?: string;
@@ -180,7 +179,6 @@ export const projects: Project[] = [
     github:
       "https://github.com/tpavan03/Phishing-Detection/tree/feat/phishbuster-agent-workflow-20260906",
     publication: "PhishBuster @ EAI Broadnets 2024",
-    image: "/projects/phishscope.png",
     release:
       "https://github.com/tpavan03/Phishing-Detection/releases/tag/phishbuster-v2.1.0-demo",
   },
@@ -213,7 +211,6 @@ export const projects: Project[] = [
       "https://github.com/tpavan03/bits-campus-social-network-main/tree/feat/bits-social-campus-desk-20260906",
     release:
       "https://github.com/tpavan03/bits-campus-social-network-main/releases/tag/bits-social-v2.0.0-demo",
-    image: "/projects/bits-social.png",
   },
   {
     title: "AI Alert Triage",
@@ -276,7 +273,6 @@ export const projects: Project[] = [
       "https://github.com/tpavan03/digital-wellbeing-analyzer/releases/tag/wellbeing-v2.0.0-demo",
     download:
       "https://github.com/tpavan03/digital-wellbeing-analyzer/releases/download/wellbeing-v2.0.0-demo/wellbeing-2.0.0-demo-debug.apk",
-    image: "/projects/digital-wellbeing.png",
   },
   {
     title: "Image Trust Desk",
@@ -298,7 +294,6 @@ export const projects: Project[] = [
       "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/tree/feat/image-trust-desk-20260906",
     release:
       "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/releases/tag/image-trust-v2.0.0-demo",
-    image: "/projects/image-trust.png",
   },
 ];
 
