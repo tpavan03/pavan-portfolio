@@ -1,22 +1,37 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 import { siteConfig } from "@/data/portfolio";
 export const metadata: Metadata = {
-  title: "Pavan — AI & ML Engineer | Agentic Systems",
+  title: {
+    default: "Pavan — AI & ML Engineer / Signal & Systems",
+    template: "%s — Pavan",
+  },
   description: siteConfig.heroTagline,
+  openGraph: {
+    title: "Pavan — Signal & Systems",
+    description: siteConfig.heroTagline,
+    type: "website",
+  },
+};
+export const viewport: Viewport = {
+  themeColor: "#10110f",
+  colorScheme: "dark",
 };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-theme="dark">
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var t;try{t=localStorage.getItem("portfolio-theme")}catch(e){}document.documentElement.dataset.theme=t==="dark"||t==="light"?t:"light"})()`,
-          }}
+        <link
+          rel="preload"
+          href="/fonts/manrope-extra-bold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
         />
       </head>
       <body>
@@ -26,6 +41,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollReveal />
       </body>
     </html>
   );

@@ -14,3 +14,4 @@ pnpm-debug.log*
 *.tsbuildinfo
 test-results/
 playwright-report/
+.vercel

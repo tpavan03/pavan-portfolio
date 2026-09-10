@@ -1,100 +1,111 @@
 import {
   education,
-  experiences,
   publications,
   siteConfig,
   techStack,
 } from "@/data/portfolio";
 import SelectedWork from "@/components/SelectedWork";
 import Contact from "@/components/Contact";
+import Expertise from "@/components/Expertise";
+import Journey from "@/components/Journey";
+const systems = [
+  ["Real-time scheduling", "C / FreeRTOS / EDF", "rtos-edf-laedf-scheduler"],
+  [
+    "Kernel-to-userspace audio",
+    "Linux / Netlink / ALSA",
+    "linux-kernel-syscall-audio-controller-main",
+  ],
+  [
+    "NFS protocol simulation",
+    "File handles / Durable state",
+    "nfs-protocol-sim",
+  ],
+  [
+    "Disk scheduling analysis",
+    "DiskSim / SSTF / Traces",
+    "distributed-systems-disk-scheduling",
+  ],
+];
 export default function Home() {
   return (
     <main id="main-content">
-      <section className="hero shell">
-        <div className="hero-meta">
-          <span>
-            <i className="status-dot" /> AI &amp; ML ENGINEER / AGENTIC SYSTEMS
-          </span>
-          <span>BANGALORE, INDIA · IST</span>
+      <section className="shell hero" aria-labelledby="hero-title">
+        <div className="hero-topline">
+          <p className="eyebrow">
+            <span className="status-dot" /> AI & ML ENGINEER · XFACTR
+          </p>
+          <span className="eyebrow">SELECTED WORK / 2026</span>
         </div>
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <p className="hero-intro">Hi, I’m Pavan.</p>
-            <h1>
-              Intelligence.
-              <br />
-              Engineered<span className="orange">.</span>
-            </h1>
-            <p className="hero-description">
-              I build agents that reason, act, and work with people.
-              <br className="desktop-break" /> Tool-calling workflows, voice AI,
-              <br className="desktop-break" /> and the systems that make them
-              dependable.
-            </p>
-            <div className="hero-actions">
-              <a className="button-primary" href="#work">
-                Explore my work <span>↘</span>
-              </a>
-              <a
-                className="button-text"
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View résumé <span>↗</span>
-              </a>
-            </div>
-          </div>
-          <div
-            className="hero-visual"
-            aria-label="Abstract connected intelligence sculpture"
-          >
-            <div className="visual-grid" />
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit orbit-three" />
-            <div className="core">✳</div>
-            <span className="visual-coordinate coordinate-top">
-              SYSTEM_01
-              <br />
-              HUMAN × MACHINE
+        <p className="hero-intro">Hi, I’m Pavan. I turn complex ideas into</p>
+        <h1 id="hero-title">
+          Intelligence
+          <span className="hero-line">
+            with <em>intent.</em>
+            <span className="hero-asterisk" aria-hidden="true">
+              ✳
             </span>
-            <span className="visual-coordinate coordinate-bottom">
-              IDEA → MODEL → IMPACT
-            </span>
-            <div className="visual-badge">
-              <span className="status-dot" /> Building with purpose
-            </div>
+          </span>
+        </h1>
+        <div className="hero-lower">
+          <span className="hero-margin-note">
+            01 — THINK
+            <br />
+            02 — BUILD
+            <br />
+            03 — REFINE
+          </span>
+          <p>
+            AI agents that act. Systems that hold up.
+            <br />
+            From voice interfaces to secure runtimes,
+            <br />I build the engineering around intelligence.
+          </p>
+          <div className="hero-actions">
+            <a className="button-primary" href="#work">
+              Explore my work <span>↘</span>
+            </a>
+            <a
+              className="button-text"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              The résumé <span>↗</span>
+            </a>
           </div>
         </div>
         <div className="hero-bottom">
-          <span>SCROLL TO EXPLORE ↓</span>
           <span>
-            AI ENGINEERING &nbsp; / &nbsp; BACKEND SYSTEMS &nbsp; / &nbsp;
-            RESEARCH
+            BANGALORE, INDIA <span className="muted">/ 12.97° N, 77.59° E</span>
           </span>
+          <a href="#focus">A LITTLE FURTHER DOWN ↓</a>
         </div>
       </section>
-      <div className="marquee" aria-label="Specialties">
-        <div>
-          AGENTIC AI <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> VOICE
-          INTELLIGENCE <span>✳</span> INTELLIGENT SECURITY <span>✳</span>
+      <section className="focus-section shell" id="focus">
+        <div className="section-kicker">
+          <span className="eyebrow">THE INTERSECTION</span>
+          <p>Three disciplines. One connected approach.</p>
         </div>
-      </div>
-      <section className="shell section" id="work">
+        <Expertise />
+      </section>
+      <section className="section shell" id="work">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">01 / SELECTED WORK</p>
+            <p className="eyebrow accent">01 / THE WORK</p>
             <h2>
-              Built to solve.
+              Less noise.
               <br />
-              <span className="muted">Designed to scale.</span>
+              <span className="muted">More substance.</span>
             </h2>
           </div>
           <p>
-            A selection of systems at the intersection of
+            Professional systems, independent projects,
             <br />
-            machine intelligence and real-world impact.
+            and research that asks better questions.
+            <br />
+            <span className="subtle-note">
+              Open a project to get under the hood.
+            </span>
           </p>
         </div>
         <SelectedWork featuredOnly />
@@ -103,204 +114,193 @@ export default function Home() {
         <div className="shell section">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">02 / EXPERIENCE</p>
+              <p className="eyebrow accent">02 / THE TRAJECTORY</p>
               <h2>
-                From experiments
+                Built through
                 <br />
-                to production.
+                <span className="muted">experience.</span>
               </h2>
             </div>
-            <span className="outline-label">THE JOURNEY SO FAR ↙</span>
+            <a className="button-text" href="/experience">
+              Read the full story ↗
+            </a>
           </div>
-          {experiences.map((e) => (
-            <article className="experience-row" key={e.company + e.role}>
-              <div>
-                <p className="eyebrow">{e.duration}</p>
-                <h3>
-                  {e.company}
-                  <span className="orange">.</span>
-                </h3>
-                <p>{e.location}</p>
-              </div>
-              <div>
-                <h4>{e.role}</h4>
-                <ul>
-                  {e.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-                <div className="tags">
-                  {e.tech.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-          <div className="stats">
+          <Journey />
+          <div className="metrics">
             <div>
+              <span className="eyebrow">SECURITY / NETSKOPE</span>
               <strong>
-                4.25M<span>+</span>
+                4.25<span>M</span>
               </strong>
-              <p>Security events processed</p>
+              <p>IPS events in the ML pipeline</p>
             </div>
             <div>
-              <strong>
-                99.9<span>%</span>
-              </strong>
-              <p>Reported phishing research accuracy</p>
-            </div>
-            <div>
+              <span className="eyebrow">IMPACT / NETSKOPE</span>
               <strong>
                 80<span>%</span>
               </strong>
               <p>Reported reduction in manual triage</p>
             </div>
+            <div>
+              <span className="eyebrow">TEACHING / BITS DIGITAL</span>
+              <strong>
+                500<span>+</span>
+              </strong>
+              <p>Students supported each trimester</p>
+            </div>
           </div>
         </div>
       </section>
       <section className="shell section about-section" id="about">
-        <div>
-          <p className="eyebrow">03 / A LITTLE ABOUT ME</p>
+        <div className="about-title">
+          <p className="eyebrow accent">03 / BEHIND THE WORK</p>
           <h2>
-            Curiosity is
+            An engineer.
+            <br />A researcher.
             <br />
-            the constant<span className="orange">.</span>
+            <em>Always curious.</em>
           </h2>
-          <div className="about-stamp" aria-hidden="true">
-            p<span>✳</span>
-          </div>
+          <a className="button-text" href="/resume.pdf" download>
+            Download résumé ↓
+          </a>
         </div>
         <div className="about-copy">
           <p className="large-copy">
-            I’m {siteConfig.name}, an engineer drawn to the space where research
-            becomes something useful.
+            I’m {siteConfig.name}. I like the difficult bit between “what if”
+            and “it works.”
           </p>
           <p>{siteConfig.bio}</p>
           <p>
-            From understanding security signals to optimizing chip networks, I
-            enjoy turning difficult questions into clear, dependable systems.
+            My interests go deep: learning how a model sees a URL, how an agent
+            recovers mid-conversation, and how a kernel talks to the world.
+            Teaching keeps me asking the simple questions.
           </p>
           <div className="education">
             {education.map((e) => (
-              <div key={e.degree}>
-                <span>{e.duration}</span>
-                <h4>{e.degree}</h4>
-                <p>
-                  {e.institution} <b>{e.score}</b>
-                </p>
-              </div>
+              <article key={e.degree}>
+                <span className="eyebrow">{e.duration}</span>
+                <h3>{e.degree}</h3>
+                <p>{e.institution}</p>
+                <strong>{e.score}</strong>
+              </article>
             ))}
           </div>
-          <a className="button-text" href="/resume.pdf" download>
-            Download full résumé ↓
-          </a>
+        </div>
+      </section>
+      <section className="shell toolkit">
+        <div className="section-kicker">
+          <p className="eyebrow">THE TOOLKIT</p>
+          <p>Chosen for the problem. Never the other way around.</p>
+        </div>
+        <div className="stack-grid">
+          {techStack.map((s, i) => (
+            <details key={s.category} open={i === 0}>
+              <summary>
+                <span className="eyebrow">0{i + 1}</span>
+                <h3>{s.category}</h3>
+                <span className="stack-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div className="tags">
+                {s.items.map((t) => (
+                  <a key={t} href={`/projects?q=${encodeURIComponent(t)}`}>
+                    {t} ↗
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+      <section className="shell section research" id="research">
+        <div className="research-label">
+          <p className="eyebrow accent">PEER-REVIEWED / PUBLISHED</p>
+          <span className="research-mark" aria-hidden="true">
+            [ P ]
+          </span>
+          <p className="eyebrow">
+            EAI BROADNETS 2024
+            <br />
+            PUBLISHED JAN 2026
+          </p>
+        </div>
+        <div>
+          <p className="eyebrow">EXPLAINABLE INTELLIGENCE</p>
+          <h2>
+            PhishBuster<span className="accent">.</span>
+          </h2>
+          <p className="large-copy">
+            Understanding the threat.
+            <br />
+            Explaining the prediction.
+          </p>
+          <p>
+            URL embeddings meet deep learning and Integrated Gradients. Research
+            into phishing detection that makes room for the question: why?
+          </p>
+          <div className="research-links">
+            <a
+              className="button-primary"
+              href={publications[0].doi}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read the paper ↗
+            </a>
+            <a className="button-text" href="/publications">
+              Research & education ↗
+            </a>
+          </div>
         </div>
       </section>
       <section className="shell systems-section" id="systems">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">
-              BENEATH THE INTELLIGENCE / SYSTEMS FOUNDATIONS
-            </p>
-            <h2>Deep in the systems.</h2>
+            <p className="eyebrow accent">BENEATH THE SURFACE</p>
+            <h2>Down to the system.</h2>
           </div>
           <p>
-            Scheduling, kernels, and distributed state.
+            The lower-level explorations
             <br />
-            The foundations behind dependable AI infrastructure.
+            behind the higher-level thinking.
           </p>
         </div>
         <div className="systems-list">
-          {[
-            [
-              "01",
-              "Real-time scheduling",
-              "C · FreeRTOS · EDF / LA-EDF",
-              "Deadline-based priorities and look-ahead scheduling simulations.",
-              "rtos-edf-laedf-scheduler",
-            ],
-            [
-              "02",
-              "Kernel-to-userspace audio",
-              "C · Linux · Netlink · ALSA",
-              "An operating-systems project exploring system calls and programmable audio.",
-              "linux-kernel-syscall-audio-controller-main",
-            ],
-            [
-              "03",
-              "NFS protocol simulation",
-              "C · File handles · Durable state",
-              "Stale handles, write/commit semantics, and stateful compound operations.",
-              "nfs-protocol-sim",
-            ],
-            [
-              "04",
-              "Disk scheduling analysis",
-              "DiskSim · SSTF · Trace analysis",
-              "Access-time, seek-latency, and queue statistics from a disk scheduling simulation.",
-              "distributed-systems-disk-scheduling",
-            ],
-          ].map(([n, title, tech, description, repo]) => (
+          {systems.map(([title, tech, repo], i) => (
             <a
               key={repo}
               href={`https://github.com/tpavan03/${repo}`}
               target="_blank"
               rel="noreferrer"
             >
-              <span>{n}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </div>
+              <span className="eyebrow">0{i + 1}</span>
+              <h3>{title}</h3>
               <small>{tech}</small>
-              <b>↗</b>
+              <span aria-hidden="true">↗</span>
             </a>
           ))}
         </div>
       </section>
-      <section className="shell stack-section">
-        <p className="eyebrow">THE TOOLKIT / CHOSEN FOR THE PROBLEM</p>
-        <div className="stack-grid">
-          {techStack.map((s) => (
-            <div key={s.category}>
-              <h3>{s.category}</h3>
-              <p>{s.items.join(" · ")}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="shell section research">
-        <p className="eyebrow">04 / PUBLISHED RESEARCH</p>
-        {publications.map((p) => (
-          <a href={p.doi} target="_blank" rel="noreferrer" key={p.title}>
-            <div>
-              <p>
-                {p.venue} <span>· {p.published}</span>
-              </p>
-              <h2>{p.title}</h2>
-              <p>Deep learning meets intelligent security.</p>
-            </div>
-            <span className="research-arrow">↗</span>
-          </a>
-        ))}
-      </section>
-      <section id="contact" className="contact-section">
-        <div className="shell">
-          <p className="eyebrow">HAVE AN INTERESTING CHALLENGE?</p>
-          <h2>
-            Let’s build
-            <br />
-            what’s next<span>↗</span>
-          </h2>
-          <div className="contact-bottom">
-            <p>
-              AI agents, intelligent products, or a good conversation.
+      <section className="contact-section" id="contact">
+        <div className="shell contact-grid">
+          <div>
+            <p className="eyebrow">04 / THE NEXT CONVERSATION</p>
+            <h2>
+              Something
               <br />
-              I’d love to hear what you’re working on.
+              on your
+              <br />
+              <em>mind?</em>
+              <span aria-hidden="true">↗</span>
+            </h2>
+            <p>
+              Let’s turn a good question
+              <br />
+              into something worth building.
             </p>
-            <Contact />
           </div>
+          <Contact />
         </div>
       </section>
     </main>

@@ -11,6 +11,16 @@ const attempts = new Map<string, { count: number; expires: number }>();
 const maxBodyBytes = 16_384;
 
 export async function POST(request: NextRequest) {
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      {
+        error:
+          "Message storage is unavailable on this deployment. Please contact me by email instead.",
+      },
+      { status: 503 },
+    );
+  }
+
   const origin = request.headers.get("origin");
   try {
     if (!origin || new URL(origin).host !== request.headers.get("host")) {
