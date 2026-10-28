@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <footer className="shell site-footer">
       <span>© {new Date().getFullYear()} Pavan</span>
-      <span>SIGNAL & SYSTEMS / PORTFOLIO</span>
+      <span>BUILT WITH INTENT. ALWAYS CURIOUS.</span>
       <div>
         <a href={siteConfig.github} target="_blank" rel="noreferrer">
           GitHub ↗

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main id="main-content" className="shell section inner-page">
-      <p className="eyebrow accent">THE COMPLETE INDEX / 01—08</p>
+      <p className="eyebrow accent">PRODUCTS, PLATFORMS & RESEARCH</p>
       <h1>
         Ideas.
         <br />

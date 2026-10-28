@@ -3,32 +3,33 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScrollAtmosphere from "@/components/ScrollAtmosphere";
 import { siteConfig } from "@/data/portfolio";
 export const metadata: Metadata = {
   title: {
-    default: "Pavan — AI & ML Engineer / Signal & Systems",
+    default: "Pavan — AI Engineer, Systems Builder & Curious Human",
     template: "%s — Pavan",
   },
   description: siteConfig.heroTagline,
   openGraph: {
-    title: "Pavan — Signal & Systems",
+    title: "Pavan — Engineering with a human touch",
     description: siteConfig.heroTagline,
     type: "website",
   },
 };
 export const viewport: Viewport = {
-  themeColor: "#10110f",
-  colorScheme: "dark",
+  themeColor: "#f7f8fc",
+  colorScheme: "light dark",
 };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
-          href="/fonts/manrope-extra-bold.ttf"
+          href="/fonts/space-grotesk.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
@@ -42,6 +43,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <ScrollReveal />
+        <ScrollAtmosphere />
       </body>
     </html>
   );

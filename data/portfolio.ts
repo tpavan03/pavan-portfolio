@@ -22,8 +22,8 @@ export type Experience = {
 };
 
 export type Project = {
-  category: "AI & security" | "Systems & research";
-  art: "agents" | "security" | "social" | "chip";
+  category: "AI & security" | "Systems & research" | "Products & apps";
+  art: "agents" | "security" | "social" | "chip" | "exam" | "wellness";
   featured: boolean;
   context: string;
   title: string;
@@ -35,6 +35,7 @@ export type Project = {
   download?: string;
   github?: string;
   publication?: string;
+  live?: string;
 };
 
 export type Publication = {
@@ -118,6 +119,44 @@ export const experiences: Experience[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: "Exam Prep King",
+    subtitle: "A focused workspace for AP SI & NICL AO",
+    description:
+      "An exam preparation product that connects original-paper archives, pattern-aware timed tests, custom practice and a useful review trail.",
+    highlights: [
+      "Separate AP SI and NICL AO tracks, with Prelims and Mains blueprints and exam-specific timers and marking rules.",
+      "Source-labelled paper archives distinguish original AP scans from NICL publisher reconstructions. Custom tests and answer review connect practice to the next revision session.",
+      "React/TypeScript frontend, Supabase account progress and an Android companion build; deployed on Vercel.",
+    ],
+    tech: ["React", "TypeScript", "Supabase", "Capacitor", "Vercel"],
+    category: "Products & apps",
+    art: "exam",
+    featured: true,
+    context: "Personal product · Exam preparation",
+    github: "https://github.com/tpavan03/lakshya-ap-si-prep",
+    live: "https://lakshya-ap-si-prep.vercel.app",
+    release: "https://github.com/tpavan03/lakshya-ap-si-prep/releases",
+  },
+  {
+    title: "Saapadu",
+    subtitle: "Familiar food. Thoughtful daily routines.",
+    description:
+      "A South Indian food and wellness tracker, bringing meals, nutrition, movement and optional fasting windows into one personal diary.",
+    highlights: [
+      "Searchable South Indian food catalogue, custom portions, macro tracking, calorie goal planning, weight trends and movement records.",
+      "Dedicated fasting workspace with custom windows, absolute timestamps, saved session history and neutral early endings; quick hydration and repeat-meal logging.",
+      "Flutter web and Android, local-first persistence and optional Supabase account backups. Existing authenticated backup and isolation paths are verified.",
+    ],
+    tech: ["Flutter", "Dart", "Supabase", "Android", "Vercel"],
+    category: "Products & apps",
+    art: "wellness",
+    featured: true,
+    context: "Personal product · Food & wellness",
+    github: "https://github.com/tpavan03/saapadu-tracker",
+    live: "https://saapadu-tracker.vercel.app",
+    release: "https://github.com/tpavan03/saapadu-tracker/releases/tag/v1.2.0",
+  },
   {
     title: "AgentHRMS",
     subtitle: "Tool-calling agents & real-time voice",

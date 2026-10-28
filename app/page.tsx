@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   education,
   publications,
@@ -29,73 +30,162 @@ const systems = [
 export default function Home() {
   return (
     <main id="main-content">
-      <section className="shell hero" aria-labelledby="hero-title">
-        <div className="hero-topline">
-          <p className="eyebrow">
-            <span className="status-dot" /> AI & ML ENGINEER · XFACTR
+      <section
+        className="shell hero notebook-hero palette-zone"
+        data-palette-zone="paper"
+        data-theme="light"
+        aria-labelledby="hero-title"
+      >
+        <div className="hero-copy">
+          <p className="hero-greeting">
+            <span className="hello-dot" /> Hello, I’m Pavan.
           </p>
-          <span className="eyebrow">SELECTED WORK / 2026</span>
-        </div>
-        <p className="hero-intro">Hi, I’m Pavan. I turn complex ideas into</p>
-        <h1 id="hero-title">
-          Intelligence
-          <span className="hero-line">
-            with <em>intent.</em>
-            <span className="hero-asterisk" aria-hidden="true">
-              ✳
+          <h1 id="hero-title">
+            Engineering
+            <br />
+            with a{" "}
+            <span className="human-word">
+              human touch
+              <svg viewBox="0 0 420 20" aria-hidden="true">
+                <path d="M4 13C104 1 238 2 415 10M48 19C168 7 293 8 377 14" />
+              </svg>
             </span>
-          </span>
-        </h1>
-        <div className="hero-lower">
-          <span className="hero-margin-note">
-            01 — THINK
-            <br />
-            02 — BUILD
-            <br />
-            03 — REFINE
-          </span>
-          <p>
-            AI agents that act. Systems that hold up.
-            <br />
-            From voice interfaces to secure runtimes,
-            <br />I build the engineering around intelligence.
+          </h1>
+          <p className="hero-description">
+            I build AI agents, dependable systems, and thoughtful digital
+            products. The interesting part? Making the complicated feel simple.
           </p>
+          <div className="hero-role">
+            <span>AI & ML Engineer</span>
+            <span className="role-divider" />
+            <span>
+              Currently at <strong>XFactr</strong>
+            </span>
+          </div>
           <div className="hero-actions">
             <a className="button-primary" href="#work">
-              Explore my work <span>↘</span>
+              Explore the work <span>↗</span>
             </a>
             <a
-              className="button-text"
+              className="button-outline"
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
             >
-              The résumé <span>↗</span>
+              My résumé <span>↓</span>
             </a>
+          </div>
+          <div className="hero-socials">
+            <a href={siteConfig.github} target="_blank" rel="noreferrer">
+              GitHub ↗
+            </a>
+            <a href={siteConfig.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn ↗
+            </a>
+            <a href={`mailto:${siteConfig.email}`}>Say hello ↗</a>
+          </div>
+        </div>
+        <div className="portrait-composition">
+          <div className="portrait-backdrop" aria-hidden="true">
+            <span>CURIOUS BY DEFAULT.</span>
+            <svg viewBox="0 0 400 400">
+              <path d="M40 210C-30 90 280-20 330 100S190 400 80 310 260 100 380 230" />
+            </svg>
+          </div>
+          <figure className="portrait-frame">
+            <Image
+              src="/pavan-portrait.jpg"
+              alt="Pavan"
+              width={460}
+              height={460}
+              preload
+              sizes="(max-width: 700px) 75vw, 350px"
+            />
+            <figcaption>
+              <span className="portrait-signature">Pavan</span>
+              <span>
+                Engineer. Researcher.
+                <br />
+                Always a work in progress.
+              </span>
+            </figcaption>
+          </figure>
+          <div className="portrait-sticker">
+            <span>✳</span> A little curiosity
+            <br />
+            goes a long way.
           </div>
         </div>
         <div className="hero-bottom">
-          <span>
-            BANGALORE, INDIA <span className="muted">/ 12.97° N, 77.59° E</span>
-          </span>
-          <a href="#focus">A LITTLE FURTHER DOWN ↓</a>
+          <span>GOOD SYSTEMS BEGIN WITH GOOD QUESTIONS.</span>
+          <a href="#focus">
+            A few things I care about <span>↓</span>
+          </a>
         </div>
       </section>
-      <section className="focus-section shell" id="focus">
+      <section
+        className="focus-section shell palette-zone"
+        data-palette-zone="paper"
+        data-theme="light"
+        id="focus"
+      >
         <div className="section-kicker">
           <span className="eyebrow">THE INTERSECTION</span>
           <p>Three disciplines. One connected approach.</p>
         </div>
         <Expertise />
       </section>
-      <section className="section shell" id="work">
+      <section
+        className="statement-zone palette-zone"
+        id="approach"
+        data-palette-zone="midnight"
+        data-theme="dark"
+        aria-labelledby="approach-title"
+      >
+        <div className="shell statement-grid">
+          <div>
+            <p className="eyebrow">THE ENGINEERING AROUND INTELLIGENCE</p>
+            <h2 id="approach-title">
+              The model is
+              <br />
+              <span>only the beginning.</span>
+            </h2>
+            <p className="statement-copy">
+              A useful agent needs more than a good answer. It needs context,
+              the right tools, a way to ask permission, and a way to recover.
+              That’s the part I love building.
+            </p>
+            <a className="button-text" href="#work">
+              See how it comes together <span>↓</span>
+            </a>
+          </div>
+          <div className="system-art" aria-hidden="true">
+            <div className="system-art-orbit orbit-one" />
+            <div className="system-art-orbit orbit-two" />
+            <div className="system-core">
+              intent<span>→</span>action
+            </div>
+            <span className="system-node node-context">Context</span>
+            <span className="system-node node-tools">Tools</span>
+            <span className="system-node node-human">Human approval</span>
+            <span className="system-node node-state">Durable state</span>
+            <span className="system-node node-recovery">Recovery</span>
+          </div>
+        </div>
+      </section>
+      <section
+        className="section shell palette-zone"
+        data-palette-zone="paper"
+        data-theme="light"
+        id="work"
+      >
         <div className="section-heading">
           <div>
             <p className="eyebrow accent">01 / THE WORK</p>
             <h2>
-              Less noise.
+              Ideas, brought
               <br />
-              <span className="muted">More substance.</span>
+              <span className="muted">into the world.</span>
             </h2>
           </div>
           <p>
@@ -110,7 +200,12 @@ export default function Home() {
         </div>
         <SelectedWork featuredOnly />
       </section>
-      <section className="experience-section" id="experience">
+      <section
+        className="experience-section palette-zone"
+        data-palette-zone="moss"
+        data-theme="light"
+        id="experience"
+      >
         <div className="shell section">
           <div className="section-heading">
             <div>
@@ -151,7 +246,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="shell section about-section" id="about">
+      <section
+        className="shell section about-section palette-zone"
+        data-palette-zone="paper"
+        data-theme="light"
+        id="about"
+      >
         <div className="about-title">
           <p className="eyebrow accent">03 / BEHIND THE WORK</p>
           <h2>
@@ -187,7 +287,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="shell toolkit">
+      <section
+        className="shell toolkit palette-zone"
+        data-palette-zone="paper"
+        data-theme="light"
+      >
         <div className="section-kicker">
           <p className="eyebrow">THE TOOLKIT</p>
           <p>Chosen for the problem. Never the other way around.</p>
@@ -213,7 +317,12 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className="shell section research" id="research">
+      <section
+        className="shell section research palette-zone"
+        data-palette-zone="lavender"
+        data-theme="light"
+        id="research"
+      >
         <div className="research-label">
           <p className="eyebrow accent">PEER-REVIEWED / PUBLISHED</p>
           <span className="research-mark" aria-hidden="true">
@@ -254,7 +363,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="shell systems-section" id="systems">
+      <section
+        className="shell systems-section palette-zone"
+        data-palette-zone="midnight"
+        data-theme="dark"
+        id="systems"
+      >
         <div className="section-heading">
           <div>
             <p className="eyebrow accent">BENEATH THE SURFACE</p>
@@ -282,15 +396,18 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className="contact-section" id="contact">
+      <section
+        className="contact-section palette-zone"
+        data-palette-zone="cobalt"
+        data-theme="dark"
+        id="contact"
+      >
         <div className="shell contact-grid">
           <div>
             <p className="eyebrow">04 / THE NEXT CONVERSATION</p>
             <h2>
-              Something
-              <br />
-              on your
-              <br />
+              Something <br />
+              on your <br />
               <em>mind?</em>
               <span aria-hidden="true">↗</span>
             </h2>

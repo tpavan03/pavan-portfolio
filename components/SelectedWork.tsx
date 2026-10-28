@@ -1,7 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects } from "@/data/portfolio";
-const categories = ["All work", "AI & security", "Systems & research"];
+import ProjectVisual from "./ProjectVisual";
+const categories = [
+  "All work",
+  "Products & apps",
+  "AI & security",
+  "Systems & research",
+];
 export default function SelectedWork({
   featuredOnly = false,
 }: {
@@ -11,7 +17,17 @@ export default function SelectedWork({
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState("");
   const [copied, setCopied] = useState("");
-  const available = projects.filter((p) => !featuredOnly || p.featured);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const available = featuredOnly
+    ? projects.filter((p) =>
+        [
+          "Exam Prep King",
+          "Saapadu",
+          "AgentHRMS",
+          "PhishBuster / PhishScope",
+        ].includes(p.title),
+      )
+    : projects;
   useEffect(() => {
     const sync = () => {
       const p = new URLSearchParams(location.search);
@@ -68,12 +84,26 @@ export default function SelectedWork({
           <span className="sr-only">Search projects</span>
           <span aria-hidden="true">⌕</span>
           <input
+            ref={searchRef}
             name="project-search"
             placeholder="Search a project or technology…"
             autoComplete="off"
             value={query}
             onChange={(e) => update(e.target.value, filter)}
           />
+          {query && (
+            <button
+              type="button"
+              className="search-clear"
+              aria-label="Clear project search"
+              onClick={() => {
+                update("", filter);
+                searchRef.current?.focus();
+              }}
+            >
+              ×
+            </button>
+          )}
         </label>
       </div>
       <div className="index-caption">
@@ -85,6 +115,7 @@ export default function SelectedWork({
       <div className="project-list">
         {visible.map((p, i) => (
           <article className="project" key={p.title}>
+            <ProjectVisual project={p} />
             <details open={expanded === p.title}>
               <summary
                 onClick={(e) => {
@@ -128,6 +159,16 @@ export default function SelectedWork({
                     {p.github && (
                       <a href={p.github} target="_blank" rel="noreferrer">
                         Explore source & documentation ↗
+                      </a>
+                    )}
+                    {p.live && (
+                      <a
+                        className="project-live-link"
+                        href={p.live}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open live product ↗
                       </a>
                     )}
                     {p.download && (

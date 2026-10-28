@@ -14,6 +14,7 @@ export default function Navbar() {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState("");
   const [progress, setProgress] = useState(0);
+  const [ready, setReady] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
@@ -62,6 +63,7 @@ export default function Navbar() {
     document.addEventListener("keydown", onKey);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+    setReady(true);
     return () => {
       document.removeEventListener("keydown", onKey);
       window.removeEventListener("scroll", onScroll);
@@ -75,7 +77,13 @@ export default function Navbar() {
   }, [open]);
   return (
     <>
-      <header className="site-header">
+      <header
+        className="site-header"
+        data-navigation-ready={ready}
+        data-follow-atmosphere
+        data-theme="light"
+        data-palette="paper"
+      >
         <nav className="shell navigation" aria-label="Main navigation">
           <Link href="/" className="wordmark" aria-label="Pavan home">
             pavan
@@ -135,6 +143,8 @@ export default function Navbar() {
       <dialog
         ref={dialog}
         className="command-dialog"
+        data-follow-atmosphere
+        data-theme="light"
         aria-labelledby="command-title"
         onCancel={() => {
           setQuery("");
@@ -168,6 +178,18 @@ export default function Navbar() {
             }
           }}
         />
+        {query && (
+          <button
+            className="command-search-clear"
+            aria-label="Clear navigation search"
+            onClick={() => {
+              setQuery("");
+              dialog.current?.querySelector<HTMLInputElement>("input")?.focus();
+            }}
+          >
+            Clear ×
+          </button>
+        )}
         <div className="command-results">
           {commands
             .filter(([name]) =>

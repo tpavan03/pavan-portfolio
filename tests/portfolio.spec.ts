@@ -1,21 +1,63 @@
 import { test, expect } from "@playwright/test";
 
-test("the dark-only homepage renders cleanly without image or local-only links", async ({
+test("the portrait-led page changes section palettes and navigation as it scrolls", async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await expect(page.locator("html")).toHaveCSS("color-scheme", "dark");
+  const header = page.locator(".site-header");
+  await expect(header).toHaveAttribute("data-navigation-ready", "true");
   await expect(
-    page.getByRole("heading", { level: 1, name: /Intelligence with intent/i }),
+    page.getByRole("heading", { level: 1, name: /Engineering.*human touch/i }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: /mode|theme/i })).toHaveCount(
-    0,
+  await expect(
+    page.getByRole("img", { name: "Pavan", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Toggle light and dark theme" }),
+  ).toHaveCount(0);
+  await expect(header).toHaveAttribute("data-palette", "paper");
+  const backgrounds = new Set<string>();
+  for (const [id, palette, theme] of [
+    ["approach", "midnight", "dark"],
+    ["work", "paper", "light"],
+    ["experience", "moss", "light"],
+    ["research", "lavender", "light"],
+    ["systems", "midnight", "dark"],
+    ["contact", "cobalt", "dark"],
+  ]) {
+    const section = page.locator(`#${id}`);
+    await section.evaluate((node) =>
+      node.scrollIntoView({ behavior: "instant", block: "start" }),
+    );
+    await expect(header).toHaveAttribute("data-palette", palette);
+    await expect(header).toHaveAttribute("data-theme", theme);
+    backgrounds.add(
+      await section.evaluate((node) => getComputedStyle(node).backgroundColor),
+    );
+  }
+  expect(backgrounds.size).toBeGreaterThanOrEqual(4);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.evaluate(() =>
+    scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "instant",
+    }),
   );
-  await expect(page.locator("img, picture, video, canvas")).toHaveCount(0);
+  await expect(header).toHaveAttribute("data-palette", "cobalt");
+  await page.keyboard.press("Control+k");
+  const dialog = page.getByRole("dialog", { name: "GO SOMEWHERE INTERESTING" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toHaveAttribute("data-theme", "dark");
+  await page.keyboard.press("Escape");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page
+    .locator("#focus")
+    .evaluate((node) =>
+      node.scrollIntoView({ behavior: "instant", block: "start" }),
+    );
+  await expect(header).toHaveAttribute("data-theme", "light");
   await expect(
     page.locator('a[href*="localhost"], a[href*="127.0.0.1"]'),
   ).toHaveCount(0);
@@ -53,12 +95,19 @@ test("mobile navigation opens, closes with Escape, and follows section links", a
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+  await expect(
+    page.getByRole("heading", { name: /Something\s+on\s+your\s+mind\?/i }),
+  ).toHaveCount(1);
 });
 
 test("command dialog supports shortcuts, search, arrow navigation, and Escape", async ({
   page,
 }) => {
   await page.goto("/");
+  await expect(page.locator(".site-header")).toHaveAttribute(
+    "data-navigation-ready",
+    "true",
+  );
   await page.keyboard.press("Control+k");
 
   const dialog = page.getByRole("dialog", { name: "GO SOMEWHERE INTERESTING" });
@@ -116,7 +165,7 @@ test("project search, filters, disclosures, and deep links stay in the URL", asy
     page.getByRole("heading", { name: "No matches. A different angle?" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Clear filters ↗" }).click();
-  await expect(page.locator(".project")).toHaveCount(8);
+  await expect(page.locator(".project")).toHaveCount(10);
   await expect(page).toHaveURL(/\/projects$/);
 
   await page
@@ -185,7 +234,7 @@ test("contact topics build the mail subject and copy the email address", async (
     .toBe("thokalapavan.pp@gmail.com");
 });
 
-test("health, resume, and all page routes are available without image markup", async ({
+test("health, resume, and all page routes remain available", async ({
   request,
 }) => {
   const health = await request.get("/api/health");
@@ -204,10 +253,7 @@ test("health, resume, and all page routes are available without image markup", a
     const response = await request.get(route);
     expect(response.ok(), `${route} should respond successfully`).toBe(true);
     const html = await response.text();
-    expect(
-      html,
-      `${route} should not render raster image elements`,
-    ).not.toMatch(/<(?:img|picture)\b/i);
+    if (route === "/") expect(html).toContain("pavan-portrait.jpg");
     expect(html, `${route} should not contain localhost links`).not.toMatch(
       /href=["'][^"']*(?:localhost|127\.0\.0\.1)/i,
     );
