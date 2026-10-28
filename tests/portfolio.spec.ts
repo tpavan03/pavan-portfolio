@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("the portrait-led page changes section palettes and navigation as it scrolls", async ({
+test("the coastal day moves through eleven phases and reverses with native scrolling", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -17,29 +17,41 @@ test("the portrait-led page changes section palettes and navigation as it scroll
   await expect(
     page.getByRole("button", { name: "Toggle light and dark theme" }),
   ).toHaveCount(0);
-  await expect(header).toHaveAttribute("data-palette", "paper");
   await expect(page.locator(".portrait-sticker")).toHaveCount(0);
   expect((await header.boundingBox())!.width).toBeLessThanOrEqual(860);
-  const backgrounds = new Set<string>();
-  for (const [id, palette, theme] of [
-    ["approach", "midnight", "dark"],
-    ["work", "paper", "light"],
-    ["experience", "moss", "light"],
-    ["research", "lavender", "light"],
-    ["systems", "midnight", "dark"],
-    ["contact", "paper", "light"],
-  ]) {
-    const section = page.locator(`#${id}`);
+  const world = page.locator("#day-world");
+  await expect(world).toHaveAttribute("aria-hidden", "true");
+  await expect(world).toHaveCSS("pointer-events", "none");
+  await expect(world).toHaveAttribute("data-active-phase", "firstlight");
+  const phases = [
+    "firstlight",
+    "sunrise",
+    "morning",
+    "noon",
+    "rain",
+    "clearing",
+    "goldenhour",
+    "sunset",
+    "bluehour",
+    "night",
+    "midnight",
+  ];
+  for (const phase of [...phases, "sunrise", "rain", "firstlight"]) {
+    const section = page.locator(`[data-day-phase="${phase}"]`);
+    await expect(section).toHaveCount(1);
     await section.evaluate((node) =>
       node.scrollIntoView({ behavior: "instant", block: "start" }),
     );
-    await expect(header).toHaveAttribute("data-palette", palette);
-    await expect(header).toHaveAttribute("data-theme", theme);
-    backgrounds.add(
-      await section.evaluate((node) => getComputedStyle(node).backgroundColor),
+    await expect(world).toHaveAttribute("data-active-phase", phase);
+    await expect(header).toHaveAttribute(
+      "data-theme",
+      (await section.getAttribute("data-theme"))!,
+    );
+    await expect(header).toHaveAttribute(
+      "data-palette",
+      (await section.getAttribute("data-palette-zone"))!,
     );
   }
-  expect(backgrounds.size).toBeGreaterThanOrEqual(4);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.evaluate(() =>
     scrollTo({
@@ -47,11 +59,12 @@ test("the portrait-led page changes section palettes and navigation as it scroll
       behavior: "instant",
     }),
   );
-  await expect(header).toHaveAttribute("data-palette", "paper");
+  await expect(world).toHaveAttribute("data-active-phase", "midnight");
+  await expect(header).toHaveAttribute("data-theme", "dark");
   await page.keyboard.press("Control+k");
   const dialog = page.getByRole("dialog", { name: "GO SOMEWHERE INTERESTING" });
   await expect(dialog).toBeVisible();
-  await expect(dialog).toHaveAttribute("data-theme", "light");
+  await expect(dialog).toHaveAttribute("data-theme", "dark");
   await page.keyboard.press("Escape");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page
@@ -59,7 +72,8 @@ test("the portrait-led page changes section palettes and navigation as it scroll
     .evaluate((node) =>
       node.scrollIntoView({ behavior: "instant", block: "start" }),
     );
-  await expect(header).toHaveAttribute("data-theme", "light");
+  await expect(world).toHaveAttribute("data-active-phase", "night");
+  await expect(header).toHaveAttribute("data-theme", "dark");
   await expect(
     page.locator('a[href*="localhost"], a[href*="127.0.0.1"]'),
   ).toHaveCount(0);
@@ -100,6 +114,122 @@ test("mobile navigation opens, closes with Escape, and follows section links", a
   await expect(
     page.getByRole("heading", { name: /Let’s talk about it/i }),
   ).toHaveCount(1);
+});
+
+test("the coastal scenery tracks the sun, a passing shower, and the midnight ocean", async ({
+  page,
+}) => {
+  await page.goto("/#about");
+  const world = page.locator("#day-world");
+  const enter = async (phase: string) => {
+    await page
+      .locator(`[data-day-phase="${phase}"]`)
+      .evaluate((node) =>
+        node.scrollIntoView({ behavior: "instant", block: "start" }),
+      );
+    await expect(world).toHaveAttribute("data-active-phase", phase);
+  };
+  await expect(world).toHaveAttribute("data-active-phase", "sunrise");
+  await expect(world).toHaveAttribute("data-ocean", "shore");
+  const sun = world.locator(".world-sun");
+  const sunriseY = (await sun.boundingBox())!.y;
+  await enter("noon");
+  await expect
+    .poll(async () => (await sun.boundingBox())!.y)
+    .toBeLessThan(sunriseY);
+  await enter("rain");
+  await expect(world).toHaveAttribute("data-rain", "true");
+  await expect
+    .poll(() =>
+      world
+        .locator(".world-rain")
+        .evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBeGreaterThan(0.1);
+  await enter("clearing");
+  await expect(world).toHaveAttribute("data-rain", "false");
+  await expect(world.locator(".world-rain")).toHaveCSS("opacity", "0");
+  await enter("midnight");
+  await expect(world).toHaveAttribute("data-moon", "true");
+  await expect(world).toHaveAttribute("data-ocean", "deep");
+  await expect
+    .poll(() =>
+      world
+        .locator(".world-moon")
+        .evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBeGreaterThan(0.5);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(world).toHaveAttribute("data-reduced-motion", "true");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.getAnimations().filter((animation) => {
+            const target = (animation.effect as KeyframeEffect | null)?.target;
+            return (
+              target instanceof Element &&
+              target.closest("#day-world") &&
+              animation.playState === "running"
+            );
+          }).length,
+      ),
+    )
+    .toBe(0);
+  await enter("rain");
+  await expect(world).toHaveAttribute("data-reduced-motion", "true");
+  await expect(world.locator(".world-rain i").first()).toHaveCSS(
+    "animation-name",
+    "none",
+  );
+  await page.goto("/projects");
+  await expect(world).toHaveCount(0);
+  await expect(page.locator(".site-header")).toHaveAttribute(
+    "data-theme",
+    "light",
+  );
+  await page.getByRole("link", { name: "Pavan home" }).click();
+  await expect(world).toHaveCount(1);
+  await expect(world).toHaveAttribute("data-active-phase", "firstlight");
+});
+
+test("chapter gateways add depth without blocking navigation or reduced-motion reading", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const gateway = page.locator(".world-gateway");
+  await expect(page.locator("#day-world")).toHaveAttribute(
+    "data-active-phase",
+    "firstlight",
+  );
+  await expect(gateway).toHaveAttribute("aria-hidden", "true");
+  await expect(gateway).toHaveCSS("pointer-events", "none");
+  const initialTransform = await gateway.evaluate(
+    (node) => getComputedStyle(node).transform,
+  );
+  await page.locator("#about").evaluate((node) =>
+    scrollTo({
+      top: node.getBoundingClientRect().top + scrollY - innerHeight * 0.58,
+      behavior: "instant",
+    }),
+  );
+  await expect
+    .poll(() =>
+      gateway.evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBeGreaterThan(0.5);
+  await expect(gateway).not.toHaveCSS("transform", initialTransform);
+  await page.getByRole("button", { name: "Open command menu" }).click();
+  await expect(
+    page.getByRole("dialog", { name: "GO SOMEWHERE INTERESTING" }),
+  ).toBeVisible();
+  await page.keyboard.press("Escape");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(gateway).toHaveCSS("display", "none");
+  await expect(page.locator("#about > .chapter-depth")).toHaveCSS(
+    "transform",
+    "none",
+  );
 });
 
 test("the portrait card and actual product screenshot choices work with the keyboard", async ({

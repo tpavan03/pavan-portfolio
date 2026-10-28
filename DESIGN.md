@@ -16,7 +16,7 @@ colors:
   studioPaper: "#FCFCFB"
   studioInk: "#303B2B"
   studioSage: "#7E8D71"
-  studioNight: "#141B20"
+  studioNight: "#03050A"
   studioBook: "#F3F1E9"
 typography:
   display:
@@ -88,11 +88,27 @@ Self-hosted Space Grotesk carries headings; Manrope is the reading voice and IBM
 
 ## Layout
 
-A quiet 780px floating pill navigation precedes a spacious name-led introduction. The portrait is a physical photo card that tilts with a pointer and flips by button, touch or keyboard. A workbench contains project/research artifacts. A two-viewport sticky passage moves an idea note and actual application screen as two narrative statements replace one another. Text opacity ranges must not overlap; reduced motion changes this into a static, fully readable section.
+The homepage is one continuous coastal day, with a full-viewport fixed world behind native-scrolling content. Eleven chapters change the camera, sky, celestial path, atmosphere, shoreline and water depth. This is not a stack of opaque color bands. Soft radial reading veils protect text; content shifts gently in depth, clouds move at different distances, and a foreground edge gateway hands off between chapters. The landscape is original code-native SVG/CSS, without stock photos or reference assets.
 
-Two alternating product stories use large screenshots in dimensional device frames, concise copy, working screenshot selectors and live/source/build-story links. Professional career selectors remain. Research has a printed-note composition; the dark image wall shows actual public project/demo artifacts, with clear sample/fixture captions. A physical open résumé book links to the unchanged PDF. Contact retains subject selection, email composition, clipboard and social links.
+| Chapter    | Journey time | Content                          | Environment                            |
+| ---------- | ------------ | -------------------------------- | -------------------------------------- |
+| firstlight | 05:40        | Personal introduction / portrait | Cool first light, low sun, shore       |
+| sunrise    | 06:30        | About / artifact workbench       | Warm sun, shallow water, beach dunes   |
+| morning    | 08:15        | Idea-to-product scroll passage   | Rising sun, open morning sky           |
+| noon       | 12:00        | Work introduction                | High sun and clean daylight            |
+| rain       | 14:10        | Exam Prep King                   | Passing rain, grey clouds, rippled sea |
+| clearing   | 15:40        | Saapadu                          | Clear light after the shower           |
+| goldenhour | 17:00        | Career                           | Warm low light                         |
+| sunset     | 18:20        | Research                         | Coral horizon and reflected sunlight   |
+| bluehour   | 19:10        | Public project gallery           | Deep blue, first stars, rising moon    |
+| night      | 21:00        | Technical interests / toolkit    | Dark sky and moonlight                 |
+| midnight   | 00:00        | Résumé book / contact            | Near-black open ocean, moon reflection |
 
-Desktop content is capped at 1160px. Phones stack naturally with normal page scrolling, smaller physical objects, full-width product visuals and an accessible mobile menu. Never use horizontal scroll to conceal overflow.
+Journey times are editorial scene labels, not actual time or live weather. LocalTime separately shows the actual IST clock. The small fixed phase caption is quiet and not an aria-live announcement. Normal scrolling, touch, keyboard and hash links remain native; no wheel interception or scrolljacking is used.
+
+A quiet 780px floating navigation precedes the tactile portrait, real product stories, career selectors, research print, public project image wall and open résumé book. All ten projects remain in the searchable /projects index. Portrait reversal and screenshot choice remain keyboard/touch operable. The central passage is 200svh on desktop and 190svh on phones, allowing two nonoverlapping narrative phases. Reduced motion makes the full text static and readable instead.
+
+Desktop content is capped at 1160px. At 390px and 320px the physical objects and product visuals stack naturally. Reading veils stay within section geometry; never hide horizontal overflow to conceal an oversized pseudo-element.
 
 ## Elevation & Depth
 
@@ -104,9 +120,13 @@ Use depth for physical photo cards, paper, device frames and the open résumé. 
 
 ## Components
 
-HomeScenes owns PortraitCard, LocalTime, StoryPassage, ProductStories, ArtifactShelf and ResumeBook. app/page.tsx owns story order and factual composition. SelectedWork and ProjectVisual remain the canonical searchable project index and conceptual illustrations on /projects. Navbar owns the quiet mobile navigation and native modal command palette. ScrollReveal handles one-time entrance reveals and ScrollAtmosphere tracks the active section palette. Runtime behavior belongs in these shared components, not inline duplicate scripts.
+DayWorld.tsx owns the phase map, one passive native-scroll/rAF observer, deterministic celestial/weather/coastal layers, cached transforms on visible chapter wrappers, phase caption and route cleanup. app/day-world.css owns world colors, geometry, sky interpolation, rain/waves, reading veils and all reduced-motion scenery rules. app/page.tsx maps the story to stable data-day-phase chapters; ProductStories maps its two articles to rain and clearing. #day-world exposes data-active-phase, data-rain, data-moon, data-ocean and data-reduced-motion for verification.
 
-Actual screenshots and public source artifacts are bundled in public/work. manifest.json pins repository image sources to commits and records live captures, preview profiles and the résumé rendering. Saapadu uses a fictional sample profile; BITS Social and Image Trust are public fictional fixtures; PhishScope is deterministic demo scoring and does not claim the research classifier’s accuracy. The historical EDF output is an existing committed artifact, not a fresh benchmark.
+ScrollAtmosphere owns the shared navigation/dialog palette and uses the same 32% viewport threshold as DayWorld. Keep both aligned; nested product chapters are intentional. DayWorld cleans scroll, resize, media and ResizeObserver subscriptions, cancels pending animation frames and removes its body attributes when leaving the homepage. It does not run a perpetual JavaScript animation loop. Depth uses cached direct transforms only on visible wrappers; do not write inherited CSS properties through every content subtree on each frame. The edge gateway is a separate pointer-transparent layer below navigation, using SVG, opacity and transform without large blur/backdrop filters. Its center leaves the reading and interaction area clear. Ambient rain is paused outside its chapter; reduced motion disables ambient animation and chapter transforms while retaining phase tracking and all text.
+
+HomeScenes owns portrait, actual clock, idea passage, product screenshot selectors, artifacts and résumé book. SelectedWork/ProjectVisual remain the canonical searchable project index and conceptual illustrations on /projects. Navbar owns mobile navigation and the native modal command palette. ScrollReveal handles one-time entrance reveals.
+
+Actual screenshots and public source artifacts are bundled in public/work. manifest.json pins repository sources and records live captures and sample profiles. Saapadu uses a fictional sample profile; BITS Social and Image Trust are public fictional fixtures; PhishScope is deterministic demo scoring and does not claim the research classifier’s accuracy. Historical EDF output is an existing committed artifact, not a fresh benchmark.
 
 ## Do’s and Don’ts
 

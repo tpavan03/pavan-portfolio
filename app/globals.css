@@ -3287,7 +3287,7 @@ kbd {
   padding-block: 120px 100px;
   text-align: center;
 }
-.maker-introduction > h2 {
+.maker-introduction > .chapter-depth > h2 {
   font-family: Space, sans-serif;
   font-size: 50px;
   font-weight: 500;
@@ -3296,10 +3296,12 @@ kbd {
   margin: 30px 0;
   color: #313b2b;
 }
-.maker-introduction > h2 > span {
+.maker-introduction > .chapter-depth > h2 > span {
   color: #87947b;
 }
-.maker-introduction > p:not(.scene-caption):not(.shelf-caption) {
+.maker-introduction
+  > .chapter-depth
+  > p:not(.scene-caption):not(.shelf-caption) {
   font-size: 16px;
   line-height: 1.95;
   max-width: 640px;
@@ -4512,11 +4514,13 @@ kbd {
   .maker-introduction {
     padding-block: 85px 70px;
   }
-  .maker-introduction > h2 {
+  .maker-introduction > .chapter-depth > h2 {
     font-size: 37px;
     letter-spacing: -1.4px;
   }
-  .maker-introduction > p:not(.scene-caption):not(.shelf-caption) {
+  .maker-introduction
+    > .chapter-depth
+    > p:not(.scene-caption):not(.shelf-caption) {
     font-size: 14px;
   }
   .artifact-shelf {

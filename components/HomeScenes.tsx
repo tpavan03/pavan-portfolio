@@ -141,9 +141,10 @@ export function StoryPassage() {
     <section
       ref={ref}
       id="approach"
-      className={`story-passage palette-zone ${reduced ? "is-reduced" : ""}`}
-      data-palette-zone="midnight"
-      data-theme="dark"
+      className={`story-passage palette-zone day-chapter ${reduced ? "is-reduced" : ""}`}
+      data-palette-zone="morning"
+      data-day-phase="morning"
+      data-theme="light"
       aria-labelledby="approach-title"
     >
       <div className="passage-sticky">
@@ -308,7 +309,10 @@ export function ProductStories() {
         const image = story.images[views[story.id] ?? 0];
         return (
           <article
-            className={`product-story product-story-${story.id}`}
+            className={`product-story product-story-${story.id} day-chapter`}
+            data-day-phase={story.id === "exam" ? "rain" : "clearing"}
+            data-palette-zone={story.id === "exam" ? "rain" : "clearing"}
+            data-theme="light"
             key={story.id}
           >
             <div className="product-stage" data-reveal="visual">

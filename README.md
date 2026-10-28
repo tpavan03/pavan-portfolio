@@ -2,7 +2,7 @@
 
 Live: [pavan-portfolio-topaz.vercel.app](https://pavan-portfolio-topaz.vercel.app).
 
-A personal Next.js portfolio with a tactile GitHub portrait, cinematic scroll storytelling, large real-product screens, a public-artifact gallery and an open-résumé ending. Includes a searchable project index, shareable project details, expertise and experience selectors, keyboard command menu, responsive navigation, résumé downloads, and a health endpoint. Content is stored in `data/portfolio.ts`; static documents and self-hosted fonts live in `public/`.
+A personal Next.js portfolio that travels through eleven coastal day scenes, from a sunrise beach through passing rain to a moonlit midnight ocean. It includes a tactile GitHub portrait, large real-product screens, a public-artifact gallery and an open-résumé ending. Includes a searchable project index, shareable project details, expertise and experience selectors, keyboard command menu, responsive navigation, résumé downloads, and a health endpoint. Content is stored in `data/portfolio.ts`; static documents and self-hosted fonts live in `public/`.
 
 ## Run locally with Docker
 
@@ -62,7 +62,7 @@ npx playwright install --with-deps chromium
 npm run test:e2e
 ```
 
-Tests target the running Docker service at port 3000. Set `TEST_BASE_URL` to check another deployment. The nine workflows cover portrait reversal, screenshot selection, scroll-linked scene phases, section palettes, hidden-link focus, live reduced-motion changes, project search/deep links, keyboard command menu, expertise and career selectors, mobile navigation/layout, email composition and copying, résumé downloads, and backend health.
+Tests target the running Docker service at port 3000. Set `TEST_BASE_URL` to check another deployment. The browser workflows cover portrait reversal, screenshot selection, scroll-linked scene phases, section palettes, hidden-link focus, live reduced-motion changes, project search/deep links, keyboard command menu, expertise and career selectors, mobile navigation/layout, email composition and copying, résumé downloads, and backend health.
 
 See [HOSTING_OPTIONS.md](HOSTING_OPTIONS.md) for sourced hosting prices and storage requirements, and [DESIGN_NOTES.md](DESIGN_NOTES.md) for design references and resume provenance.
 
@@ -76,7 +76,7 @@ The file is created after the first valid contact submission. It is not exposed 
 
 ## Local project showcase
 
-The upgraded projects are separate repositories on unique feature branches; see [PROJECT_RELEASES.md](PROJECT_RELEASES.md) for source and release links. Screenshots are kept in those repositories and releases. The homepage uses actual owned product screenshots, public repository artifacts and a GitHub profile portrait; the project index retains conceptual diagrams. Source provenance is in public/work/manifest.json. It preserves all original projects and adds Exam Prep King and Saapadu with live/source links. Section palettes are static CSS; a lightweight scroll observer makes the floating navigation and command menu follow the active section without changing scroll behavior.
+The upgraded projects are separate repositories on unique feature branches; see [PROJECT_RELEASES.md](PROJECT_RELEASES.md) for source and release links. Screenshots are kept in those repositories and releases. The homepage uses actual owned product screenshots, public repository artifacts and a GitHub profile portrait; the project index retains conceptual diagrams. Source provenance is in public/work/manifest.json. It preserves all original projects and adds Exam Prep King and Saapadu with live/source links. DayWorld follows native scrolling through eleven chapters with original SVG/CSS scenery, layered depth, a sun/moon path, rain and slow ocean waves. Reduced motion stops ambient effects and exposes static content. ScrollAtmosphere keeps the floating navigation and command menu aligned with the current chapter.
 
 In this workspace, after Docker starts, use:
 
