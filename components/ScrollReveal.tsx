@@ -23,7 +23,7 @@ export default function ScrollReveal() {
     );
     document
       .querySelectorAll(
-        ".section-heading,.about-title,.research,.metrics,.section-kicker",
+        ".section-heading,.about-title,.research,.metrics,.section-kicker,[data-reveal],.build-frame,.research-print,.resume-book",
       )
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();

@@ -9,7 +9,7 @@ test("the portrait-led page changes section palettes and navigation as it scroll
   const header = page.locator(".site-header");
   await expect(header).toHaveAttribute("data-navigation-ready", "true");
   await expect(
-    page.getByRole("heading", { level: 1, name: /Engineering.*human touch/i }),
+    page.getByRole("heading", { level: 1, name: /Hey.*Pavan/i }),
   ).toBeVisible();
   await expect(
     page.getByRole("img", { name: "Pavan", exact: true }),
@@ -18,6 +18,8 @@ test("the portrait-led page changes section palettes and navigation as it scroll
     page.getByRole("button", { name: "Toggle light and dark theme" }),
   ).toHaveCount(0);
   await expect(header).toHaveAttribute("data-palette", "paper");
+  await expect(page.locator(".portrait-sticker")).toHaveCount(0);
+  expect((await header.boundingBox())!.width).toBeLessThanOrEqual(860);
   const backgrounds = new Set<string>();
   for (const [id, palette, theme] of [
     ["approach", "midnight", "dark"],
@@ -25,7 +27,7 @@ test("the portrait-led page changes section palettes and navigation as it scroll
     ["experience", "moss", "light"],
     ["research", "lavender", "light"],
     ["systems", "midnight", "dark"],
-    ["contact", "cobalt", "dark"],
+    ["contact", "paper", "light"],
   ]) {
     const section = page.locator(`#${id}`);
     await section.evaluate((node) =>
@@ -45,11 +47,11 @@ test("the portrait-led page changes section palettes and navigation as it scroll
       behavior: "instant",
     }),
   );
-  await expect(header).toHaveAttribute("data-palette", "cobalt");
+  await expect(header).toHaveAttribute("data-palette", "paper");
   await page.keyboard.press("Control+k");
   const dialog = page.getByRole("dialog", { name: "GO SOMEWHERE INTERESTING" });
   await expect(dialog).toBeVisible();
-  await expect(dialog).toHaveAttribute("data-theme", "dark");
+  await expect(dialog).toHaveAttribute("data-theme", "light");
   await page.keyboard.press("Escape");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page
@@ -96,8 +98,101 @@ test("mobile navigation opens, closes with Escape, and follows section links", a
     ),
   ).toBe(true);
   await expect(
-    page.getByRole("heading", { name: /Something\s+on\s+your\s+mind\?/i }),
+    page.getByRole("heading", { name: /Let’s talk about it/i }),
   ).toHaveCount(1);
+});
+
+test("the portrait card and actual product screenshot choices work with the keyboard", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".site-header")).toHaveAttribute(
+    "data-navigation-ready",
+    "true",
+  );
+  const portrait = page.locator("button.portrait-object");
+  await expect(portrait).toHaveAccessibleName("Turn Pavan’s portrait card");
+  await portrait.focus();
+  await portrait.press("Enter");
+  await expect(portrait).toHaveAttribute("aria-pressed", "true");
+  await expect(portrait).toHaveAccessibleName("Show Pavan’s portrait");
+  await expect(portrait).toContainText("Hi again.");
+  await expect(
+    page.getByRole("img", { name: "Pavan", exact: true }),
+  ).toBeHidden();
+  await portrait.press("Space");
+  await expect(portrait).toHaveAttribute("aria-pressed", "false");
+  await expect(
+    page.getByRole("img", { name: "Pavan", exact: true }),
+  ).toBeVisible();
+
+  for (const [id, initial, next] of [
+    ["exam", "Study desk", "Welcome"],
+    ["saapadu", "Daily overview", "Fasting"],
+  ]) {
+    const story = page.locator(`.product-story-${id}`);
+    const before = await story.locator("img").getAttribute("src");
+    await expect(
+      story.getByRole("button", { name: initial, exact: true }),
+    ).toHaveAttribute("aria-pressed", "true");
+    const choice = story.getByRole("button", { name: next, exact: true });
+    await choice.focus();
+    await choice.press("Enter");
+    await expect(choice).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      story.getByRole("button", { name: initial, exact: true }),
+    ).toHaveAttribute("aria-pressed", "false");
+    await expect(story.locator("img")).not.toHaveAttribute("src", before!);
+    await expect(
+      story.getByRole("img", {
+        name: new RegExp(`— ${next}, actual product screenshot`),
+      }),
+    ).toBeVisible();
+  }
+  await expect(
+    page.getByRole("link", { name: "Open Pavan’s résumé PDF" }),
+  ).toHaveAttribute("href", "/resume.pdf");
+});
+
+test("the engineering scene follows scroll progress and remains readable with reduced motion", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const scene = page.locator("#approach");
+  const first = page.locator(".passage-first");
+  const second = page.locator(".passage-second");
+  await scene.evaluate((node) =>
+    scrollTo({
+      top: node.getBoundingClientRect().top + scrollY,
+      behavior: "instant",
+    }),
+  );
+  await expect(first).toHaveCSS("opacity", "1");
+  await expect(second).toHaveCSS("opacity", "0");
+  await expect(second.getByRole("link")).toHaveAttribute("tabindex", "-1");
+  await scene.evaluate((node) =>
+    scrollTo({
+      top:
+        node.getBoundingClientRect().top +
+        scrollY +
+        (node.getBoundingClientRect().height - innerHeight) * 0.8,
+      behavior: "instant",
+    }),
+  );
+  await expect(first).toHaveCSS("opacity", "0");
+  await expect(second).toHaveCSS("opacity", "1");
+  await expect(second.getByRole("link")).toHaveAttribute("tabindex", "0");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(first).toHaveCSS("opacity", "1");
+  await expect(second).toHaveCSS("opacity", "1");
+  await expect(second.getByRole("link")).toHaveAttribute("tabindex", "0");
+  await expect(scene.locator(".passage-sticky")).not.toHaveCSS(
+    "position",
+    "sticky",
+  );
+  const firstBox = (await first.boundingBox())!;
+  const secondBox = (await second.boundingBox())!;
+  expect(secondBox.y).toBeGreaterThanOrEqual(firstBox.y + firstBox.height);
 });
 
 test("command dialog supports shortcuts, search, arrow navigation, and Escape", async ({

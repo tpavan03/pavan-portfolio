@@ -1,0 +1,77 @@
+[
+  {
+    "file": "phishscope.png",
+    "project": "Phishing-Detection",
+    "repository_path": "docs/demo-desktop.png",
+    "commit": "3549dc35a650a62d07a2c05e4265dedae0cb89e8",
+    "raw_url": "https://raw.githubusercontent.com/tpavan03/Phishing-Detection/3549dc35a650a62d07a2c05e4265dedae0cb89e8/docs/demo-desktop.png",
+    "source_url": "https://github.com/tpavan03/Phishing-Detection/blob/3549dc35a650a62d07a2c05e4265dedae0cb89e8/docs/demo-desktop.png",
+    "caption_note": "PhishScope URL-analysis desk from the tested public demo branch. Deterministic workflow screenshot; not a claimed99.9% live classifier result.",
+    "bytes": 271047
+  },
+  {
+    "file": "bits-review.png",
+    "project": "bits-campus-social-network-main",
+    "repository_path": "docs/demo/review-desk.png",
+    "commit": "7e78059616ca8690b88a4821270e5aaecb122568",
+    "raw_url": "https://raw.githubusercontent.com/tpavan03/bits-campus-social-network-main/7e78059616ca8690b88a4821270e5aaecb122568/docs/demo/review-desk.png",
+    "source_url": "https://github.com/tpavan03/bits-campus-social-network-main/blob/7e78059616ca8690b88a4821270e5aaecb122568/docs/demo/review-desk.png",
+    "caption_note": "BITS Social review desk from its public Campus Desk release. Seeded fictional campus data and rule-based moderation, not real student incidents.",
+    "bytes": 164855
+  },
+  {
+    "file": "wellbeing.png",
+    "project": "digital-wellbeing-analyzer",
+    "repository_path": "docs/screenshots/wellbeing-dashboard.png",
+    "commit": "3ee6502fb8599f272953ef3954f811bf02ff0d6f",
+    "raw_url": "https://raw.githubusercontent.com/tpavan03/digital-wellbeing-analyzer/3ee6502fb8599f272953ef3954f811bf02ff0d6f/docs/screenshots/wellbeing-dashboard.png",
+    "source_url": "https://github.com/tpavan03/digital-wellbeing-analyzer/blob/3ee6502fb8599f272953ef3954f811bf02ff0d6f/docs/screenshots/wellbeing-dashboard.png",
+    "caption_note": "Digital Wellbeing Local Insights Android dashboard from the public tested release. Check visible sample label before captioning; does not prove personal usage or clinical outcomes.",
+    "bytes": 157867
+  },
+  {
+    "file": "image-trust.png",
+    "project": "kubernetes-secure-image-verifier-main",
+    "repository_path": "docs/demo/desktop.png",
+    "commit": "982d2ee2476d2403c78c7aeb19b60f8406d51014",
+    "raw_url": "https://raw.githubusercontent.com/tpavan03/kubernetes-secure-image-verifier-main/982d2ee2476d2403c78c7aeb19b60f8406d51014/docs/demo/desktop.png",
+    "source_url": "https://github.com/tpavan03/kubernetes-secure-image-verifier-main/blob/982d2ee2476d2403c78c7aeb19b60f8406d51014/docs/demo/desktop.png",
+    "caption_note": "Image Trust Desk policy lab from the public tested release. Fictional signed fixtures; not a production Kubernetes cluster or image vulnerability scan.",
+    "bytes": 207675
+  },
+  {
+    "file": "edf-output.jpg",
+    "project": "rtos-edf-laedf-scheduler",
+    "repository_path": "edf-scheduler/Output/Output 1.jpg",
+    "commit": "008c1c0f5c63518f42b88ead47778629d1066810",
+    "raw_url": "https://raw.githubusercontent.com/tpavan03/rtos-edf-laedf-scheduler/008c1c0f5c63518f42b88ead47778629d1066810/edf-scheduler/Output/Output%201.jpg",
+    "source_url": "https://github.com/tpavan03/rtos-edf-laedf-scheduler/blob/008c1c0f5c63518f42b88ead47778629d1066810/edf-scheduler/Output/Output%201.jpg",
+    "caption_note": "Historical EDF scheduler output committed to the public repository. Source artifact only, not an independently rerun hardware or energy benchmark.",
+    "bytes": 122549
+  },
+  {
+    "file": "exam-dashboard.png",
+    "source_url": "https://lakshya-ap-si-prep.vercel.app",
+    "caption_note": "Actual public guest study desk, captured2026-10-28; no user account or personal records."
+  },
+  {
+    "file": "exam-prep.png",
+    "source_url": "https://lakshya-ap-si-prep.vercel.app",
+    "caption_note": "Actual public sign-in page, captured2026-10-28."
+  },
+  {
+    "file": "saapadu-dashboard.png",
+    "source_url": "https://saapadu-tracker.vercel.app",
+    "caption_note": "Actual tested application render with fictional Preview sample profile, captured during this owner-authorized development session."
+  },
+  {
+    "file": "saapadu-fasting.png",
+    "source_url": "https://saapadu-tracker.vercel.app",
+    "caption_note": "Actual tested fasting-screen render, illustrative temporary timer."
+  },
+  {
+    "file": "resume-preview.png",
+    "source_url": "/resume.pdf",
+    "caption_note": "First page rendered directly from the existing owner r\u00e9sum\u00e9 PDF with pdftoppm; opens the unchanged original document."
+  }
+]

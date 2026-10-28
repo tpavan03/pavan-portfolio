@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.heroTagline,
   openGraph: {
-    title: "Pavan — Engineering with a human touch",
+    title: "Pavan — A curious mind, a builder’s hands",
     description: siteConfig.heroTagline,
     type: "website",
   },

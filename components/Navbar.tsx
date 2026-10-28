@@ -13,7 +13,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState("");
-  const [progress, setProgress] = useState(0);
   const [ready, setReady] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -48,16 +47,16 @@ export default function Navbar() {
       if (e.key === "Escape") setOpen(false);
     };
     const onScroll = () => {
-      const height = document.documentElement.scrollHeight - innerHeight;
-      setProgress(height > 0 ? scrollY / height : 0);
       const current = links
         .map(([, href]) => href.split("#")[1])
-        .filter(
-          (id) =>
-            (document.getElementById(id)?.getBoundingClientRect().top ??
-              Infinity) < 180,
-        )
-        .at(-1);
+        .map((id) => ({
+          id,
+          top:
+            document.getElementById(id)?.getBoundingClientRect().top ??
+            Infinity,
+        }))
+        .filter((section) => section.top < 180)
+        .sort((a, b) => b.top - a.top)[0]?.id;
       setActive(current || "");
     };
     document.addEventListener("keydown", onKey);
@@ -87,20 +86,12 @@ export default function Navbar() {
         <nav className="shell navigation" aria-label="Main navigation">
           <Link href="/" className="wordmark" aria-label="Pavan home">
             pavan
-            <span className="brand-mark" aria-hidden="true">
-              ✳
-            </span>
-            <span className="brand-note">
-              AI ENGINEER
-              <br />
-              BANGALORE, IN
-            </span>
           </Link>
           <div
             className={`nav-links ${open ? "is-open" : ""}`}
             id="navigation-links"
           >
-            {links.map(([name, href], i) => (
+            {links.map(([name, href]) => (
               <Link
                 key={name}
                 href={href}
@@ -112,7 +103,6 @@ export default function Navbar() {
                 }
               >
                 {name}
-                <span className="nav-number">0{i + 1}</span>
               </Link>
             ))}
           </div>
@@ -135,10 +125,6 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-        <div
-          className="reading-progress"
-          style={{ transform: `scaleX(${progress})` }}
-        />
       </header>
       <dialog
         ref={dialog}

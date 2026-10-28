@@ -1,8 +1,6 @@
-# Personal Notebook — design and content notes
+# Personal Studio — design and content notes
 
-The October refresh uses a distinct cobalt-and-paper engineering notebook
-identity, with section-specific paper, midnight, moss, lavender and cobalt atmospheres, a personal GitHub portrait, original
-project illustrations and self-hosted Space Grotesk/Manrope/Plex typography.
+The October studio iteration uses a spacious personal introduction, physical photo and paper objects, a scroll-linked night passage, large real-product stories, a dark public-project gallery and an open-résumé ending. A small floating navigation stays quiet. Typography combines self-hosted Space Grotesk, Manrope and Plex with Georgia italic.
 The reference [gowthamoleti.com](https://www.gowthamoleti.com/) informed personal
 warmth and navigation polish; no reference assets, text or identity were copied.
 Normative visual decisions and runtime token ownership are in DESIGN.md.
@@ -15,10 +13,10 @@ Normative visual decisions and runtime token ownership are in DESIGN.md.
 - Selectable career entries with full experience on a separate page.
 - Expandable toolkit with technology search links.
 - Keyboard command menu (Ctrl/⌘ K), search, arrow-key navigation, Escape dismissal, and native dialog focus containment.
-- Active section navigation, reading progress, subtle scroll reveals, mobile navigation, and reduced-motion support.
+- Active section navigation, subtle scroll reveals, mobile navigation, and reduced-motion support.
 - Topic-based email composition, copy email, telephone, LinkedIn and GitHub actions.
 
-The site uses the owner-authorized GitHub avatar from https://avatars.githubusercontent.com/u/132299814?v=4, saved locally without image manipulation. Native SVG/CSS project diagrams illustrate concepts rather than pretending to be application screenshots. All original eight project entries remain; Exam Prep King and Saapadu are added with their real live/source links. Sections change atmosphere during normal scrolling; the floating navigation and command dialog follow the active section. There is no global theme toggle or scrolljacking. Reduced-motion preferences disable decorative transitions. There are no localhost links or fabricated contact-success flows. Vercel contact uses email; the legacy Docker API retains its local persistence.
+The site uses the owner-authorized GitHub avatar from https://avatars.githubusercontent.com/u/132299814?v=4, saved locally without image manipulation. Large homepage visuals are real product screenshots and public source artifacts. The searchable project index retains its clearly conceptual SVG/CSS illustrations. All original eight project entries remain; Exam Prep King and Saapadu are added with their real live/source links. Sections change atmosphere during normal scrolling; the floating navigation and command dialog follow the active section. There is no global theme toggle or scrolljacking. Reduced-motion preferences disable decorative transitions. There are no localhost links or fabricated contact-success flows. Vercel contact uses email; the legacy Docker API retains its local persistence.
 
 ## Design skills and sources
 
@@ -34,12 +32,12 @@ XFactr role: AI & ML Engineer — Distributed Systems & AI Platforms, July 2026 
 
 Outcome metrics describe supplied research/work results, not new independent benchmarks. Professional employer work is distinguished from public source. Public project implementation evidence and limitations remain in PROJECT_SOURCES.md.
 
-## October refresh verification
+## Studio iteration
 
-- Production Next.js build and TypeScript checks passed.
-- Seven Playwright workflows passed against the production build: section palette and navigation changes, mobile layout/menu, command dialog, project state/deep links, expertise/career selectors, email composition/copying, résumé and route health.
-- An independent browser review checked all five palettes at 1440px and 390px, with additional 320px checks. Axe WCAG 2 A/AA and 2.1 AA reported zero violations at all three widths after contrast corrections. Reduced motion, final-section navigation, and dark command dialogs were checked.
-- All original eight project records were compared with the previous revision and retained exactly; two personal applications were added.
-- Dependency audit and the strict premium UI audit reported zero findings. DESIGN.md lint has zero errors; its two orphan-token warnings describe documented accent/line tokens.
+The owner requested a closer match to the reference’s rich experience after the initial color-band redesign. Continuous Playwright scrolling revealed the defining structure: personal photo object, physical artifacts, a long atmospheric passage, large product screens, a dark visual gallery and an open-book ending. The new home implements those devices with Pavan’s own content and interactions, while keeping a distinct engineering/product story. Repeated portrait stickers and asterisk ornaments were removed. The floating navigation is smaller and quieter.
 
-The reference provides atmosphere and usability inspiration. Section artwork, palettes, copy and project diagrams are original. Contact opens an email draft; it does not claim to send a message or persist Vercel contact submissions.
+The gallery’s exact public repository commits, screenshot URLs and sample/fixture limitations are recorded in [public/work/manifest.json](public/work/manifest.json). Live Exam Prep King captures use guest mode. Saapadu previews use a fictional development profile. No reference photography, confidential employer material or fabricated benchmark output is included.
+
+Studio verification: the production build and TypeScript checks passed. Nine Playwright workflows verify the existing project/contact/navigation behavior plus portrait reversal, actual screenshot switching, scroll phases, hidden-link focus and live reduced-motion changes. Independent browser review found no overflow and zero axe WCAG 2 A/AA and 2.1 AA violations at 1440px, 390px and 320px. The strict premium audit has zero findings; DESIGN.md lint has zero errors and two warnings about documented accent/line tokens.
+
+Public screenshots use the project owners’ committed assets or actual development/live renders, with sample/fixture labels. The historical EDF output is source evidence, not a newly run benchmark. All original project records remain unchanged.
