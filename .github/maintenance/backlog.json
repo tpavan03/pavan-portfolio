@@ -1,0 +1,401 @@
+{
+  "schema": 1,
+  "repository": "tpavan03/pavan-portfolio",
+  "timezone": "Asia/Kolkata",
+  "start_date": "2026-11-03",
+  "days": 90,
+  "interval_days": 2,
+  "rotation_size": 3,
+  "rotation_index": 2,
+  "tasks": [
+    {
+      "id": "local-development-and-docker",
+      "title": "Choose a local development or Docker workflow",
+      "path": "docs/handbook/local-development-and-docker.md",
+      "body": "# Choose a local development or Docker workflow\n\nThe repository supports an interactive Next.js development server and a production-style Docker service. Use `npm ci` followed by `npm run dev` for ordinary source edits. Use `docker compose up -d --build` when checking the container and its persistent contact-data behavior.\n\nBoth paths normally use port 3000, so avoid starting competing servers on that port. Check which process serves the browser before interpreting a stale page as a failed code change. Rebuilding the Docker image is separate from editing files for a development server.\n\nRead the repository's Next.js agent instructions and installed framework documentation before changing framework behavior. The package version and lockfile define the working dependency set; a remembered API from another Next.js version is not enough. Keep application credentials out of committed environment files when extending the setup.\n\n## Implementation references\n\n- [package.json](../../package.json)\n- [compose.yaml](../../compose.yaml)\n- [AGENTS.md](../../AGENTS.md)\n",
+      "evidence": [
+        {
+          "path": "package.json",
+          "contains": [
+            "next dev",
+            "next build",
+            "next start"
+          ]
+        },
+        {
+          "path": "compose.yaml",
+          "contains": [
+            "services:",
+            "3000"
+          ]
+        },
+        {
+          "path": "AGENTS.md",
+          "contains": [
+            "node_modules/next/dist/docs/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maintain-portfolio-content",
+      "title": "Maintain profile, experience and project content",
+      "path": "docs/handbook/maintain-portfolio-content.md",
+      "body": "# Maintain profile, experience and project content\n\nThe main content model lives in `data/portfolio.ts`. It contains the profile configuration, experience, projects, publications, education and technology list. Start there when updating an existing fact instead of scattering different versions of the same claim across page components.\n\nPreserve the typed shape of each entry. Project categories and visual-art choices are constrained values used by the interface. Keep existing projects unless their removal is intentional, and distinguish a live product link from a source repository or downloadable release.\n\nFor experience or publication edits, retain the evidence behind dates, titles and outcome claims. A design refresh does not justify inventing new metrics. Check the homepage and the relevant index page after an edit; the same data can appear in more than one context, and a long title may need a mobile-layout review.\n\n## Implementation references\n\n- [data/portfolio.ts](../../data/portfolio.ts)\n- [components/SelectedWork.tsx](../../components/SelectedWork.tsx)\n",
+      "evidence": [
+        {
+          "path": "data/portfolio.ts",
+          "contains": [
+            "export const siteConfig",
+            "export const experiences",
+            "export const projects",
+            "export const publications",
+            "export const education"
+          ]
+        },
+        {
+          "path": "components/SelectedWork.tsx",
+          "contains": [
+            "projects"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "project-search-and-share-links",
+      "title": "Preserve project search and shareable URLs",
+      "path": "docs/handbook/project-search-and-share-links.md",
+      "body": "# Preserve project search and shareable URLs\n\nThe project index stores search, category and the expanded project in URL query parameters. This makes a filtered view shareable and lets browser navigation restore a meaningful selection. The homepage's featured subset is separate from the complete project catalog.\n\nWhen changing a project identity or filter label, test a direct URL as well as clicking through from the initial page. Unknown categories should fall back safely. A project that exists in the data can still be hidden by the current search or featured-only selection.\n\nReview keyboard focus and disclosure behavior after changing the cards. A share link should reveal the intended project without requiring a pointer-only interaction. Keep the source, live and release destinations distinct so visitors know whether they are opening code, an app or an installable artifact.\n\n## Implementation references\n\n- [components/SelectedWork.tsx](../../components/SelectedWork.tsx)\n- [app/projects/page.tsx](../../app/projects/page.tsx)\n",
+      "evidence": [
+        {
+          "path": "components/SelectedWork.tsx",
+          "contains": [
+            "new URLSearchParams(location.search)",
+            "featuredOnly",
+            "window.history.replaceState",
+            "popstate"
+          ]
+        },
+        {
+          "path": "app/projects/page.tsx",
+          "contains": [
+            "ProjectsPage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "screenshot-and-artifact-provenance",
+      "title": "Maintain product screenshots and artifact provenance",
+      "path": "docs/handbook/screenshot-and-artifact-provenance.md",
+      "body": "# Maintain product screenshots and artifact provenance\n\nPublic product images live under `public/work`. The manifest records where an artifact came from, what it depicts and the limits of the claim it supports. Update that provenance when replacing an image; a visually similar screenshot is not automatically evidence of the same release or environment.\n\nUse synthetic or already public demonstration data when capturing a screen. Remove account information and private operational content before adding an image to a public repository. Preserve any source-commit or release reference that makes a historical artifact traceable.\n\nCheck the homepage's screenshot choices and the project visuals after changing filenames. Asset links and captions should describe what the visitor actually sees. A conceptual diagram, public repository artifact and a running product screenshot serve different purposes; label them accurately rather than presenting all three as a live deployment.\n\n## Implementation references\n\n- [public/work/manifest.json](../../public/work/manifest.json)\n- [components/HomeScenes.tsx](../../components/HomeScenes.tsx)\n- [PROJECT_SOURCES.md](../../PROJECT_SOURCES.md)\n",
+      "evidence": [
+        {
+          "path": "public/work/manifest.json",
+          "contains": [
+            "source_url",
+            "caption_note"
+          ]
+        },
+        {
+          "path": "components/HomeScenes.tsx",
+          "contains": [
+            "screenshots"
+          ]
+        },
+        {
+          "path": "PROJECT_SOURCES.md",
+          "contains": [
+            "#"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rebuild-downloadable-resume",
+      "title": "Rebuild and verify the downloadable resume",
+      "path": "docs/handbook/rebuild-downloadable-resume.md",
+      "body": "# Rebuild and verify the downloadable resume\n\nThe downloadable resume is generated from the maintained LaTeX source in `public/resume.tex`. The repository's Python generator reads that source and produces the PDF using ReportLab. Install the required Python dependency in a suitable local environment before running the generator.\n\n```bash\npython3 -m pip install reportlab\npython3 scripts/generate-resume.py\n```\n\nReview the resulting PDF visually, including page breaks, long links and the last section. A successful script exit does not prove that every line fits cleanly. Compare names, dates and project descriptions with the portfolio data to avoid maintaining contradictory public versions.\n\nTest the actual browser download after publication. Do not replace the PDF with an unrelated export merely because the filename matches. Keep the editable source alongside the artifact so future updates remain reproducible.\n\n## Implementation references\n\n- [scripts/generate-resume.py](../../scripts/generate-resume.py)\n- [public/resume.tex](../../public/resume.tex)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n",
+      "evidence": [
+        {
+          "path": "scripts/generate-resume.py",
+          "contains": [
+            "reportlab",
+            "public/resume.tex",
+            "SimpleDocTemplate"
+          ]
+        },
+        {
+          "path": "public/resume.tex",
+          "contains": [
+            "section{Experience}"
+          ]
+        },
+        {
+          "path": "tests/portfolio.spec.ts",
+          "contains": [
+            "resume"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "email-contact-actions",
+      "title": "Maintain direct email and copy-address actions",
+      "path": "docs/handbook/email-contact-actions.md",
+      "body": "# Maintain direct email and copy-address actions\n\nThe current contact interface composes an email through the visitor's mail client. Its selected topic becomes part of the subject. Copying the address is a separate clipboard action; neither interaction proves that a message was sent or received.\n\nChange the address in the shared site configuration and check the visible address, composed link and clipboard result. Keep URL encoding intact when altering subject text. Spaces and punctuation in a topic should not break the mail link.\n\nTest both a successful clipboard interaction and an environment where clipboard access is unavailable. The visible address remains a useful fallback. This direct-email interface is deliberately different from the legacy file-backed contact endpoint, so do not show a submission-success message unless an actual supported delivery path has completed.\n\n## Implementation references\n\n- [components/Contact.tsx](../../components/Contact.tsx)\n- [data/portfolio.ts](../../data/portfolio.ts)\n",
+      "evidence": [
+        {
+          "path": "components/Contact.tsx",
+          "contains": [
+            "mailto:",
+            "encodeURIComponent",
+            "navigator.clipboard.writeText"
+          ]
+        },
+        {
+          "path": "data/portfolio.ts",
+          "contains": [
+            "email:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contact-api-storage-boundaries",
+      "title": "Understand the contact API storage boundaries",
+      "path": "docs/handbook/contact-api-storage-boundaries.md",
+      "body": "# Understand the contact API storage boundaries\n\nThe legacy contact endpoint accepts a JSON message for a persistent Node deployment. It validates fields, checks origin and uses a honeypot and an in-memory rate limit before attempting a file append. It is a storage handler, not an email delivery service.\n\nOn Vercel, the endpoint returns an unavailable response rather than claiming to persist a message on an ephemeral filesystem. The public contact UI therefore uses direct email actions. Do not remove that distinction when changing deployment settings.\n\nA Docker deployment stores accepted messages on its configured persistent volume. Back up that volume and restrict access because submissions contain personal contact information. The in-memory request limit resets on restart and does not establish a distributed abuse-control service. Verify the origin and proxy handling before putting a new public reverse proxy in front of the endpoint.\n\n## Implementation references\n\n- [app/api/contact/route.ts](../../app/api/contact/route.ts)\n- [compose.yaml](../../compose.yaml)\n",
+      "evidence": [
+        {
+          "path": "app/api/contact/route.ts",
+          "contains": [
+            "process.env.VERCEL",
+            "status: 503",
+            "appendFile",
+            "CONTACT_DATA_DIR"
+          ]
+        },
+        {
+          "path": "compose.yaml",
+          "contains": [
+            "contact-data"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "health-endpoint-and-container-checks",
+      "title": "Use the health endpoint for basic availability checks",
+      "path": "docs/handbook/health-endpoint-and-container-checks.md",
+      "body": "# Use the health endpoint for basic availability checks\n\n`GET /api/health` returns a small JSON response identifying the portfolio service. The Docker health check uses that route to determine whether the running server can respond. It is useful for basic availability, not a complete test of project links, screenshots, contact delivery or every page.\n\nWhen diagnosing a container, compare its health status with logs and an actual route response. A healthy process can still serve outdated content if the image was not rebuilt. Conversely, a browser display issue does not automatically mean the server is unavailable.\n\nKeep the health response small and free of environment values, filesystem details and secrets. If new backend dependencies are introduced, decide explicitly whether their status belongs in this check. Avoid silently turning a lightweight public route into an expensive or privileged diagnostics endpoint.\n\n## Implementation references\n\n- [app/api/health/route.ts](../../app/api/health/route.ts)\n- [Dockerfile](../../Dockerfile)\n",
+      "evidence": [
+        {
+          "path": "app/api/health/route.ts",
+          "contains": [
+            "export async function GET",
+            "status: \"ok\"",
+            "service: \"pavan-portfolio\""
+          ]
+        },
+        {
+          "path": "Dockerfile",
+          "contains": [
+            "HEALTHCHECK"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coastal-day-scene-model",
+      "title": "Understand the coastal day scene model",
+      "path": "docs/handbook/coastal-day-scene-model.md",
+      "body": "# Understand the coastal day scene model\n\nDayWorld defines the progression from first light through daytime, a passing shower and the midnight ocean. The visible phase is driven by the page's chapter positions and scrolling, rather than switching the whole portfolio according to the viewer's current wall-clock time.\n\nChapter phase identifiers connect the content to sky, sun, moon, rain and ocean settings. Preserve those identifiers when rearranging sections. Changing a heading alone should not accidentally attach a night atmosphere to an unrelated daytime chapter.\n\nCheck forward and reverse scrolling after structural edits. Native navigation, anchored links and readable content must continue to work while scenery changes. The atmosphere is an enhancement around real portfolio material; a convincing transition should not leave the visitor waiting for an animation before accessing projects, experience or contact details.\n\n## Implementation references\n\n- [components/DayWorld.tsx](../../components/DayWorld.tsx)\n- [app/page.tsx](../../app/page.tsx)\n",
+      "evidence": [
+        {
+          "path": "components/DayWorld.tsx",
+          "contains": [
+            "export const dayPhases",
+            "firstlight",
+            "data-day-phase",
+            "data-active-phase"
+          ]
+        },
+        {
+          "path": "app/page.tsx",
+          "contains": [
+            "day-chapter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reduced-motion-and-reading",
+      "title": "Preserve reduced-motion reading behavior",
+      "path": "docs/handbook/reduced-motion-and-reading.md",
+      "body": "# Preserve reduced-motion reading behavior\n\nThe scenery and interactive portrait respond to the browser's reduced-motion preference. Check that setting before assuming a static view is a rendering failure. Content must remain readable when ambient motion and pointer tilt are reduced.\n\nTest a preference change while the page is already open, not only a fresh load. The components listen for preference changes, so cleanup and state updates matter when modifying the effects. Avoid leaving old event listeners active after navigation or remounting.\n\nKeyboard actions should remain available even when decorative motion stops. A portrait can still expose its reverse content without requiring a mouse-driven tilt. Similarly, project and contact content must not depend on an animated reveal to become focusable. Use the existing browser checks to confirm the static reading path alongside the full coastal sequence.\n\n## Implementation references\n\n- [components/DayWorld.tsx](../../components/DayWorld.tsx)\n- [components/HomeScenes.tsx](../../components/HomeScenes.tsx)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n",
+      "evidence": [
+        {
+          "path": "components/DayWorld.tsx",
+          "contains": [
+            "(prefers-reduced-motion: reduce)",
+            "matchMedia"
+          ]
+        },
+        {
+          "path": "components/HomeScenes.tsx",
+          "contains": [
+            "preference.addEventListener(\"change\"",
+            "pointerType"
+          ]
+        },
+        {
+          "path": "tests/portfolio.spec.ts",
+          "contains": [
+            "reduced-motion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "navigation-and-command-menu",
+      "title": "Check navigation and the keyboard command menu",
+      "path": "docs/handbook/navigation-and-command-menu.md",
+      "body": "# Check navigation and the keyboard command menu\n\nThe navigation includes a command dialog with searchable destinations. Test opening it, entering a query, moving to a result with the keyboard and closing it with Escape. A visually open dialog is not sufficient if focus remains behind it.\n\nOn a phone, check the responsive navigation separately. Follow a section link and confirm that the menu closes without obscuring the destination. Shared navigation also follows the current chapter's atmosphere, so a palette change must preserve readable labels and focus indicators.\n\nWhen adding destinations, update the command results and the visible navigation together. Keep links to real sections or page routes, and verify a direct page load as well as in-page scrolling. Do not use a decorative icon as the only accessible name for an important action.\n\n## Implementation references\n\n- [components/Navbar.tsx](../../components/Navbar.tsx)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n",
+      "evidence": [
+        {
+          "path": "components/Navbar.tsx",
+          "contains": [
+            "dialog.current",
+            "command-results",
+            "querySelector<HTMLInputElement>",
+            "data-follow-atmosphere"
+          ]
+        },
+        {
+          "path": "tests/portfolio.spec.ts",
+          "contains": [
+            "command dialog supports shortcuts",
+            "mobile navigation opens"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "self-hosted-fonts-and-licenses",
+      "title": "Maintain self-hosted fonts and their licenses",
+      "path": "docs/handbook/self-hosted-fonts-and-licenses.md",
+      "body": "# Maintain self-hosted fonts and their licenses\n\nThe portfolio keeps its font files under `public/fonts` and references them from the application styles. Local assets make the typography part of the deployed build instead of relying on a visitor's installed fonts or an unrelated font service.\n\nWhen replacing a file, update the corresponding font-face declaration and preserve the correct family and weight mapping. Check both body text and large headings. A missing weight can look acceptable in one screenshot while changing line wrapping across the page.\n\nKeep the associated license files with redistributed fonts. The layout preloads a heading font, so check that path if an asset is renamed. Test a narrow viewport after typography changes because navigation, long project names and contact links can overflow before the main headings show an obvious problem.\n\n## Implementation references\n\n- [app/globals.css](../../app/globals.css)\n- [app/layout.tsx](../../app/layout.tsx)\n- [public/fonts/SPACE-GROTESK-LICENSE.txt](../../public/fonts/SPACE-GROTESK-LICENSE.txt)\n",
+      "evidence": [
+        {
+          "path": "app/globals.css",
+          "contains": [
+            "@font-face"
+          ]
+        },
+        {
+          "path": "app/layout.tsx",
+          "contains": [
+            "/fonts/space-grotesk.ttf",
+            "rel=\"preload\""
+          ]
+        },
+        {
+          "path": "public/fonts/SPACE-GROTESK-LICENSE.txt",
+          "contains": [
+            "SIL OPEN FONT LICENSE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "metadata-icons-and-page-titles",
+      "title": "Keep page metadata and public icons consistent",
+      "path": "docs/handbook/metadata-icons-and-page-titles.md",
+      "body": "# Keep page metadata and public icons consistent\n\nThe root layout defines the default title, title template, description and Open Graph metadata. Individual routes can provide their own title information. Update these fields deliberately when changing the public introduction; visible page headings do not automatically establish consistent share metadata.\n\nCheck the home page and a nested route after editing the title template. Avoid appending the same name twice. The description uses shared profile content, so review that content when changing the site's positioning rather than leaving an older summary in previews.\n\nPublic icon assets belong to the same identity. Verify their paths and browser rendering after replacing them. Social previews may be cached by external services, which is separate from the current application's response. A successful deployment alone does not prove that every cached external preview has refreshed.\n\n## Implementation references\n\n- [app/layout.tsx](../../app/layout.tsx)\n- [app/projects/page.tsx](../../app/projects/page.tsx)\n- [app/icon.svg](../../app/icon.svg)\n",
+      "evidence": [
+        {
+          "path": "app/layout.tsx",
+          "contains": [
+            "export const metadata",
+            "openGraph",
+            "template:",
+            "siteConfig.heroTagline"
+          ]
+        },
+        {
+          "path": "app/projects/page.tsx",
+          "contains": [
+            "export const metadata"
+          ]
+        },
+        {
+          "path": "app/icon.svg",
+          "contains": [
+            "svg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deployment-and-persistent-storage",
+      "title": "Separate Vercel deployment from persistent Docker storage",
+      "path": "docs/handbook/deployment-and-persistent-storage.md",
+      "body": "# Separate Vercel deployment from persistent Docker storage\n\nThe linked Vercel project deploys the default branch automatically. A source push is therefore different from creating a release tag, and even a documentation commit may trigger the existing build integration. Use the deployment status and canonical domain to verify which version is live.\n\nDocker is the alternative when the legacy file-backed contact handler needs persistent storage. Its contact volume has a different lifecycle from the container image. Rebuilding an image should not be confused with deliberately deleting the stored messages.\n\nKeep deployment-specific assumptions explicit. Vercel's direct-email UI does not need the Docker message volume, while a persistent container host needs backup and access controls for that data. Do not copy local environment files or private operational paths into the public repository merely to make a deployment resemble the development machine.\n\n## Implementation references\n\n- [vercel.json](../../vercel.json)\n- [compose.yaml](../../compose.yaml)\n- [app/api/contact/route.ts](../../app/api/contact/route.ts)\n- [README.md](../../README.md)\n",
+      "evidence": [
+        {
+          "path": "vercel.json",
+          "contains": [
+            "nextjs"
+          ]
+        },
+        {
+          "path": "compose.yaml",
+          "contains": [
+            "contact-data"
+          ]
+        },
+        {
+          "path": "app/api/contact/route.ts",
+          "contains": [
+            "process.env.VERCEL"
+          ]
+        },
+        {
+          "path": "README.md",
+          "contains": [
+            "pushing `main` triggers its production build"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "browser-verification-checklist",
+      "title": "Run browser checks against the intended deployment",
+      "path": "docs/handbook/browser-verification-checklist.md",
+      "body": "# Run browser checks against the intended deployment\n\nThe Playwright configuration targets a running service and allows the base URL to be overridden. Start the intended local deployment before testing, or set `TEST_BASE_URL` explicitly when checking another environment. Otherwise a passing test can belong to an older server that happens to occupy the default port.\n\nThe suite covers coastal scrolling, reduced motion, mobile navigation, portrait interaction, screenshot selection, project filters, command-menu behavior, contact actions and route availability. Run the relevant checks after a focused change, then broaden only when shared behavior was affected.\n\nKeep synthetic data in screenshots and report the deployment that was actually tested. Browser success verifies observable interaction; it does not prove every project claim, benchmark or external destination. Review visual output as well as assertions when changing typography, chapter depth or responsive spacing.\n\n## Implementation references\n\n- [playwright.config.ts](../../playwright.config.ts)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n- [package.json](../../package.json)\n",
+      "evidence": [
+        {
+          "path": "playwright.config.ts",
+          "contains": [
+            "process.env.TEST_BASE_URL",
+            "workers: 1"
+          ]
+        },
+        {
+          "path": "tests/portfolio.spec.ts",
+          "contains": [
+            "project search, filters",
+            "health, resume, and all page routes"
+          ]
+        },
+        {
+          "path": "package.json",
+          "contains": [
+            "test:e2e"
+          ]
+        }
+      ]
+    }
+  ]
+}

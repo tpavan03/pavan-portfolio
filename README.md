@@ -85,3 +85,7 @@ In this workspace, after Docker starts, use:
 ```
 
 The script expects sibling checkouts under `../../projects` (override `PROJECTS_ROOT` if needed). It starts the portfolio and the BITS Social, PhishScope and Image Trust Desk containers. It does not launch an Android emulator; download the Digital Wellbeing APK from its release and install it on a compatible Android device. The portfolio links to source and releases, with no localhost demo buttons.
+
+## Scheduled maintenance
+
+A 90-day, source-checked documentation campaign runs through GitHub Actions. See the [campaign controls and schedule](docs/maintenance-campaign.md) and [handbook queue](docs/handbook/README.md).
