@@ -1,4 +1,12 @@
 {
   "schema": 1,
-  "completed": []
+  "completed": [
+    {
+      "id": "local-development-and-docker",
+      "slot": 5,
+      "published_date": "2026-11-13",
+      "published_at": "2026-11-12T21:50:15.443361+00:00",
+      "source_commit": "dd5ba1213a89060ea03013f4733273b17fedff24"
+    }
+  ]
 }
