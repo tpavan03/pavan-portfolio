@@ -5,6 +5,7 @@
   "start_date": "2026-11-03",
   "days": 90,
   "interval_days": 2,
+  "daily_from": "2026-11-24",
   "rotation_size": 3,
   "rotation_index": 2,
   "tasks": [
@@ -393,6 +394,264 @@
           "path": "package.json",
           "contains": [
             "test:e2e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scroll-atmosphere-palette-sync",
+      "title": "Keep the shared navigation palette in step with page chapters",
+      "path": "docs/handbook/scroll-atmosphere-palette-sync.md",
+      "body": "# Keep the shared navigation palette in step with page chapters\n\nThe shared atmosphere component watches elements marked with `data-palette-zone` and selects the last one whose top has passed 32% of the viewport height. At the very bottom of the page it chooses the final zone. It then copies that palette and the zone's theme onto every element marked `data-follow-atmosphere`, which is how the floating navigation and command dialog change colour with the page.\n\nThe coastal day scene uses the same 32% threshold for its own phase. Change both together; otherwise the navigation can show one chapter's palette while the sky shows another. Nested product chapters inside the home scenes are intentional and also carry palette zones.\n\nThe component also rewrites the `theme-color` meta tag for named palettes such as cobalt, moss and lavender, and for dark themes. When adding a palette, add its CSS rules and decide whether it needs its own browser colour. Updates are batched with `requestAnimationFrame` and re-run on route change; keep the passive scroll listener and the cleanup when editing it.\n\n## Implementation references\n\n- [components/ScrollAtmosphere.tsx](../../components/ScrollAtmosphere.tsx)\n- [components/DayWorld.tsx](../../components/DayWorld.tsx)\n- [components/Navbar.tsx](../../components/Navbar.tsx)\n- [app/globals.css](../../app/globals.css)\n- [DESIGN.md](../../DESIGN.md)\n",
+      "evidence": [
+        {
+          "path": "components/ScrollAtmosphere.tsx",
+          "contains": [
+            "[data-palette-zone]",
+            "innerHeight * 0.32",
+            "[data-follow-atmosphere]",
+            "meta[name=\"theme-color\"]"
+          ]
+        },
+        {
+          "path": "components/DayWorld.tsx",
+          "contains": [
+            "height * 0.32"
+          ]
+        },
+        {
+          "path": "components/Navbar.tsx",
+          "contains": [
+            "data-follow-atmosphere"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "expertise-tabs-and-related-links",
+      "title": "Maintain the expertise tabs and their related-work links",
+      "path": "docs/handbook/expertise-tabs-and-related-links.md",
+      "body": "# Maintain the expertise tabs and their related-work links\n\nThe homepage expertise panel is a small client component with three areas: Agentic AI, Secure systems and Applied ML. Each area's line, description, tags, connection path and link are defined inside the component itself, not in the shared portfolio data file. Edit that array when the focus areas change.\n\nThe tabs follow the ARIA tab pattern. Only the selected tab is in the tab order, and Arrow Left, Arrow Right, Home and End move the selection and focus. The key handler hard-codes three tabs (`End` selects index 2 and the arrow maths uses modulo 3), so adding or removing an area means updating that logic as well as the array.\n\nEach \"Explore related work\" link opens the project index with a search query such as `/projects?q=Phish`. If a project is renamed in the data file, check that the query still finds it. Run the browser test that covers the expertise and experience selectors after any change.\n\n## Implementation references\n\n- [components/Expertise.tsx](../../components/Expertise.tsx)\n- [app/page.tsx](../../app/page.tsx)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n",
+      "evidence": [
+        {
+          "path": "components/Expertise.tsx",
+          "contains": [
+            "role=\"tablist\"",
+            "\"ArrowRight\", \"ArrowLeft\", \"Home\", \"End\"",
+            "% 3",
+            "/projects?q=Phish"
+          ]
+        },
+        {
+          "path": "tests/portfolio.spec.ts",
+          "contains": [
+            "expertise and experience selectors expose their selected content"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "career-journey-selector-labels",
+      "title": "Update career selector labels when experience entries change",
+      "path": "docs/handbook/career-journey-selector-labels.md",
+      "body": "# Update career selector labels when experience entries change\n\nThe homepage career selector reads its entries from the `experiences` list in the portfolio data file, but some of the visible text is written into the component by position. The first button shows \"XFactr\" instead of the company field, and the short role labels under each button are chosen by index (first, second, everything else). The counter also shows a fixed \"/ 03\".\n\nWhen you add, remove or reorder an experience entry, update these labels too. Otherwise a new role will show an older label, or the counter will be wrong. The full experience page numbers entries from the list order and does not use these short labels, so compare both views after an edit.\n\nThe selector buttons use `aria-pressed` to show the chosen entry, and the panel below shows its location, role, points and tags. Keep the dates and titles the same as the resume source. Run the browser test for the expertise and experience selectors afterwards.\n\n## Implementation references\n\n- [components/Journey.tsx](../../components/Journey.tsx)\n- [app/experience/page.tsx](../../app/experience/page.tsx)\n- [data/portfolio.ts](../../data/portfolio.ts)\n- [tests/portfolio.spec.ts](../../tests/portfolio.spec.ts)\n",
+      "evidence": [
+        {
+          "path": "components/Journey.tsx",
+          "contains": [
+            "i === 0 ? \"XFactr\" : x.company",
+            "AI Intern · IPS",
+            "0{active + 1} / 03",
+            "aria-pressed"
+          ]
+        },
+        {
+          "path": "app/experience/page.tsx",
+          "contains": [
+            "experiences.map"
+          ]
+        },
+        {
+          "path": "data/portfolio.ts",
+          "contains": [
+            "export const experiences"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "publications-page-copy-and-doi",
+      "title": "Review the research page copy and publication DOI link",
+      "path": "docs/handbook/publications-page-copy-and-doi.md",
+      "body": "# Review the research page copy and publication DOI link\n\nThe research and education page takes the title, venue, date and DOI of each publication, plus the education entries, from the portfolio data file. The two descriptive paragraphs under the publication title are written directly in the page component, including the list of compared models and the reported 99.9% accuracy for the RoBERTa-based LSTM.\n\nBecause that text is not in the data file, it is easy to miss. If a second publication is added, the same paragraphs would appear under it. Move the description into the data model, or make it specific, before listing more than one paper. Keep the accuracy claim tied to its evaluated dataset, as the current wording does.\n\nThe DOI button opens in a new tab. After editing, open the DOI link and check it resolves to the right paper. Also check that education scores and dates match the resume source and the design notes.\n\n## Implementation references\n\n- [app/publications/page.tsx](../../app/publications/page.tsx)\n- [data/portfolio.ts](../../data/portfolio.ts)\n- [public/resume.tex](../../public/resume.tex)\n",
+      "evidence": [
+        {
+          "path": "app/publications/page.tsx",
+          "contains": [
+            "publications.map",
+            "99.9% accuracy",
+            "Open publication DOI"
+          ]
+        },
+        {
+          "path": "data/portfolio.ts",
+          "contains": [
+            "export const publications",
+            "doi.org"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-tokens-and-theme-ownership",
+      "title": "Know where design tokens and theme colours are defined",
+      "path": "docs/handbook/design-tokens-and-theme-ownership.md",
+      "body": "# Know where design tokens and theme colours are defined\n\n`DESIGN.md` is the written design record. Its front matter lists named colours, fonts, corner radii and spacing, and its text says that `app/globals.css` owns the runtime tokens. In the stylesheet, `:root` sets the light custom properties such as `--bg`, `--text` and `--accent`; `[data-theme=\"dark\"]` overrides them; and palette zones such as moss, lavender and cobalt set their own values.\n\nThe Tailwind configuration still extends a small set of colours, a gradient and a shadow, and the stylesheet includes the Tailwind layers. Most of the current look comes from the custom properties, not from those Tailwind values. Do not assume a colour change in the Tailwind config will restyle the site.\n\nWhen changing a colour, update the CSS custom property first, then the matching value in the design record so the two stay in agreement. Check light and dark sections and every palette zone for contrast. The root layout sets the default browser theme colour, which the atmosphere component later changes while scrolling.\n\n## Implementation references\n\n- [DESIGN.md](../../DESIGN.md)\n- [app/globals.css](../../app/globals.css)\n- [tailwind.config.ts](../../tailwind.config.ts)\n- [app/layout.tsx](../../app/layout.tsx)\n",
+      "evidence": [
+        {
+          "path": "DESIGN.md",
+          "contains": [
+            "app/globals.css owns runtime tokens",
+            "darkBackground: \"#101827\""
+          ]
+        },
+        {
+          "path": "app/globals.css",
+          "contains": [
+            "--accent: #3658cc;",
+            "[data-theme=\"dark\"] {",
+            "[data-palette-zone=\"moss\"] {",
+            "@tailwind utilities;"
+          ]
+        },
+        {
+          "path": "tailwind.config.ts",
+          "contains": [
+            "hero-gradient"
+          ]
+        },
+        {
+          "path": "app/layout.tsx",
+          "contains": [
+            "themeColor: \"#f7f8fc\""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standalone-docker-image-build",
+      "title": "Understand the standalone Docker image build",
+      "path": "docs/handbook/standalone-docker-image-build.md",
+      "body": "# Understand the standalone Docker image build\n\nThe Next.js config sets `output` to `standalone` unless the `VERCEL` environment variable is present. Vercel builds use its own output, and other builds produce the self-contained server that the Dockerfile copies. The config also turns off the `X-Powered-By` header and allows `127.0.0.1` as a development origin.\n\nThe Dockerfile has three stages on `node:22-alpine`. The first installs dependencies with `npm ci`, the second runs the build with telemetry off, and the last copies only `public`, the standalone server and the static assets. The final stage runs as a non-root `nextjs` user (uid 1001) that owns `/app/data`, the directory used for stored contact messages. It listens on port 3000 and starts with `node server.js`.\n\nIf you change the build output, check that the copy paths still exist. Keep the non-root user and the data-directory ownership, or the contact handler may not be able to write. The Docker ignore file keeps `node_modules`, `.next`, environment files and Vercel settings out of the build context; extend it rather than copying secrets into the image.\n\n## Implementation references\n\n- [Dockerfile](../../Dockerfile)\n- [next.config.js](../../next.config.js)\n- [compose.yaml](../../compose.yaml)\n",
+      "evidence": [
+        {
+          "path": "next.config.js",
+          "contains": [
+            "process.env.VERCEL ? undefined : \"standalone\"",
+            "poweredByHeader: false"
+          ]
+        },
+        {
+          "path": "Dockerfile",
+          "contains": [
+            "FROM node:22-alpine AS runner",
+            "adduser --system --uid 1001 nextjs",
+            ".next/standalone",
+            "CMD [\"node\", \"server.js\"]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "local-showcase-demo-stack",
+      "title": "Start the local showcase stack with the project demos",
+      "path": "docs/handbook/local-showcase-demo-stack.md",
+      "body": "# Start the local showcase stack with the project demos\n\nThe showcase script starts the portfolio container and three project demos together with Docker Compose. It expects checkouts of `bits-social`, `phishing-detection` and `kubernetes-verifier` in a projects directory. By default that is a `projects` folder two levels above the portfolio, and the `PROJECTS_ROOT` variable overrides it.\n\nThe script first checks that Docker is reachable and stops with a clear message if any checkout is missing. It then brings up each compose file in turn; the image verifier uses its `compose.demo.yaml`. When it finishes it prints the local addresses: the portfolio on port 3000, BITS Social on 3101, PhishScope on 3102 and Image Trust Desk on 3104.\n\nThese addresses only work on the machine running the containers, so never put them in public portfolio content. Use the release notes to pick the right feature branch for each demo. To stop the stack, run `docker compose down` against the same compose files; leave the contact volume alone unless you mean to delete stored messages.\n\n## Implementation references\n\n- [scripts/start-local-showcase.sh](../../scripts/start-local-showcase.sh)\n- [PROJECT_RELEASES.md](../../PROJECT_RELEASES.md)\n- [compose.yaml](../../compose.yaml)\n",
+      "evidence": [
+        {
+          "path": "scripts/start-local-showcase.sh",
+          "contains": [
+            "PROJECTS_ROOT",
+            "for repo in bits-social phishing-detection kubernetes-verifier",
+            "compose.demo.yaml",
+            "http://localhost:3104"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "project-upgrade-release-records",
+      "title": "Keep the project upgrade release records accurate",
+      "path": "docs/handbook/project-upgrade-release-records.md",
+      "body": "# Keep the project upgrade release records accurate\n\nThe project releases file records the tested showcase upgrades from 6 September 2026. For each project it lists a dated feature branch, a demo release tag, a local URL or download, and the verified scope. The upgrades were kept on separate branches so each original default branch stays available for comparison.\n\nAdd a row when a new showcase upgrade is tagged, and keep the branch and tag links exact. Do not change an older row to point to newer work; add a new entry so the history stays readable. The file also notes that local URLs only work while their containers run, that release screenshots stay in the project repositories, and that the Digital Wellbeing APK is debug-signed for evaluation and is not a Play Store release.\n\nKeep those limits when you describe a project on the site or in the resume. A demo tag is not a production deployment. A localhost address must never appear as a public link.\n\n## Implementation references\n\n- [PROJECT_RELEASES.md](../../PROJECT_RELEASES.md)\n- [scripts/start-local-showcase.sh](../../scripts/start-local-showcase.sh)\n- [PROJECT_SOURCES.md](../../PROJECT_SOURCES.md)\n",
+      "evidence": [
+        {
+          "path": "PROJECT_RELEASES.md",
+          "contains": [
+            "Tested showcase upgrades created on 6 September 2026",
+            "bits-social-v2.0.0-demo",
+            "not a Play Store release"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hosting-options-price-review",
+      "title": "Recheck the hosting comparison before relying on its prices",
+      "path": "docs/handbook/hosting-options-price-review.md",
+      "body": "# Recheck the hosting comparison before relying on its prices\n\nThe hosting options note compares Vercel, Render, Railway, Cloudflare, Hetzner and DigitalOcean for this single Next.js app. Its prices were checked against official sources on 6 September 2026, and it links the pricing pages it used. Prices, free allowances and plan rules change, so treat the figures as a dated snapshot, not current fact.\n\nBefore choosing or paying for a host, open each linked pricing page and update the date and amounts together. Keep the note's caveats: taxes and usage above the allowance can add to the bill, and some free tiers sleep or use temporary disks. A provider that cannot keep files is not suitable for the file-backed contact handler without another storage option.\n\nThe note also covers hosting the upgraded project demos beside the portfolio. It reminds you to replace the localhost demo links with real HTTPS addresses before any cloud deployment. Do not add a price that you have not checked on the provider's own page.\n\n## Implementation references\n\n- [HOSTING_OPTIONS.md](../../HOSTING_OPTIONS.md)\n- [PROJECT_RELEASES.md](../../PROJECT_RELEASES.md)\n- [compose.yaml](../../compose.yaml)\n",
+      "evidence": [
+        {
+          "path": "HOSTING_OPTIONS.md",
+          "contains": [
+            "Prices checked against official sources on **6 September 2026**",
+            "https://vercel.com/pricing",
+            "replace `http://localhost:3101`"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skip-link-and-main-landmarks",
+      "title": "Keep the skip link and main landmarks working on every page",
+      "path": "docs/handbook/skip-link-and-main-landmarks.md",
+      "body": "# Keep the skip link and main landmarks working on every page\n\nThe root layout puts a \"Skip to content\" link first in the page body. It points to `#main-content`. The link is moved off screen until it receives keyboard focus, then slides into view above the navigation. The footer's \"Back to top\" link uses the same anchor.\n\nEvery route has to provide that target. The home, projects, experience and research pages each render a `main` element with `id=\"main-content\"`. When you add a new page, give its main element the same id. If you don't, the first Tab press leads nowhere and the footer link breaks. Keep only one `main` per page.\n\nTo test it, load a page, press Tab once and check the skip link appears. Press Enter and confirm focus moves past the navigation. Do this on a narrow screen as well, because the fixed position and the high z-index must keep the link above the floating navigation.\n\n## Implementation references\n\n- [app/layout.tsx](../../app/layout.tsx)\n- [app/globals.css](../../app/globals.css)\n- [components/Footer.tsx](../../components/Footer.tsx)\n- [app/page.tsx](../../app/page.tsx)\n- [app/projects/page.tsx](../../app/projects/page.tsx)\n",
+      "evidence": [
+        {
+          "path": "app/layout.tsx",
+          "contains": [
+            "className=\"skip-link\" href=\"#main-content\"",
+            "Skip to content"
+          ]
+        },
+        {
+          "path": "app/globals.css",
+          "contains": [
+            ".skip-link:focus {"
+          ]
+        },
+        {
+          "path": "components/Footer.tsx",
+          "contains": [
+            "href=\"#main-content\""
+          ]
+        },
+        {
+          "path": "app/projects/page.tsx",
+          "contains": [
+            "id=\"main-content\""
+          ]
+        },
+        {
+          "path": "app/experience/page.tsx",
+          "contains": [
+            "id=\"main-content\""
+          ]
+        },
+        {
+          "path": "app/publications/page.tsx",
+          "contains": [
+            "id=\"main-content\""
           ]
         }
       ]

@@ -3,7 +3,7 @@
 Source-checked guides for the current project. See [the maintenance campaign](../maintenance-campaign.md) for the schedule, scope and stop controls.
 
 <!-- maintenance:begin -->
-Published guides: **2 / 15**.
+Published guides: **2 / 25**.
 
 | Guide | Status |
 | --- | --- |
@@ -22,6 +22,16 @@ Published guides: **2 / 15**.
 | Keep page metadata and public icons consistent | Queued |
 | Separate Vercel deployment from persistent Docker storage | Queued |
 | Run browser checks against the intended deployment | Queued |
+| Keep the shared navigation palette in step with page chapters | Queued |
+| Maintain the expertise tabs and their related-work links | Queued |
+| Update career selector labels when experience entries change | Queued |
+| Review the research page copy and publication DOI link | Queued |
+| Know where design tokens and theme colours are defined | Queued |
+| Understand the standalone Docker image build | Queued |
+| Start the local showcase stack with the project demos | Queued |
+| Keep the project upgrade release records accurate | Queued |
+| Recheck the hosting comparison before relying on its prices | Queued |
+| Keep the skip link and main landmarks working on every page | Queued |
 
 Source anchors and local links are checked before each publication.
 <!-- maintenance:end -->
