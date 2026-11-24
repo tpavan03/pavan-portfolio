@@ -14,6 +14,13 @@
       "published_date": "2026-11-19",
       "published_at": "2026-11-18T22:35:39.359137+00:00",
       "source_commit": "f2590b6f3c9eb9c408346590873207feccf07a69"
+    },
+    {
+      "id": "project-search-and-share-links",
+      "slot": 11,
+      "published_date": "2026-11-24",
+      "published_at": "2026-11-24T02:12:16.580891+00:00",
+      "source_commit": "77acaddfe0567cba9dff1c305c4c8be6b4ee9d03"
     }
   ]
 }

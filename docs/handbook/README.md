@@ -3,13 +3,13 @@
 Source-checked guides for the current project. See [the maintenance campaign](../maintenance-campaign.md) for the schedule, scope and stop controls.
 
 <!-- maintenance:begin -->
-Published guides: **2 / 25**.
+Published guides: **3 / 25**.
 
 | Guide | Status |
 | --- | --- |
 | [Choose a local development or Docker workflow](local-development-and-docker.md) | Published 2026-11-13 |
 | [Maintain profile, experience and project content](maintain-portfolio-content.md) | Published 2026-11-19 |
-| Preserve project search and shareable URLs | Queued |
+| [Preserve project search and shareable URLs](project-search-and-share-links.md) | Published 2026-11-24 |
 | Maintain product screenshots and artifact provenance | Queued |
 | Rebuild and verify the downloadable resume | Queued |
 | Maintain direct email and copy-address actions | Queued |
