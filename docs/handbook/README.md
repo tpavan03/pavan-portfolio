@@ -3,14 +3,14 @@
 Source-checked guides for the current project. See [the maintenance campaign](../maintenance-campaign.md) for the schedule, scope and stop controls.
 
 <!-- maintenance:begin -->
-Published guides: **3 / 25**.
+Published guides: **4 / 25**.
 
 | Guide | Status |
 | --- | --- |
 | [Choose a local development or Docker workflow](local-development-and-docker.md) | Published 2026-11-13 |
 | [Maintain profile, experience and project content](maintain-portfolio-content.md) | Published 2026-11-19 |
 | [Preserve project search and shareable URLs](project-search-and-share-links.md) | Published 2026-11-24 |
-| Maintain product screenshots and artifact provenance | Queued |
+| [Maintain product screenshots and artifact provenance](screenshot-and-artifact-provenance.md) | Published 2026-11-27 |
 | Rebuild and verify the downloadable resume | Queued |
 | Maintain direct email and copy-address actions | Queued |
 | Understand the contact API storage boundaries | Queued |
